@@ -57,7 +57,7 @@ body,
   height: 50px;
   border-radius: 50%;
   background: #2e7d32;
-  background-image: url("./icons/add.svg");
+  background-image: url("../icons/add.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
@@ -95,7 +95,7 @@ body,
   width: 50px;
   height: 53px;
   background: white;
-  background-image: url("./icons/arrow-back.svg");
+  background-image: url("../icons/arrow-back.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 28px;
@@ -104,6 +104,16 @@ body,
 
 .search-books-results {
   padding: 80px 10px 20px;
+}
+
+.no-search-results {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* books grid */
@@ -151,7 +161,7 @@ body,
   height: 40px;
   border-radius: 50%;
   background: #60ac5d;
-  background-image: url("./icons/arrow-drop-down.svg");
+  background-image: url("../icons/arrow-drop-down.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
