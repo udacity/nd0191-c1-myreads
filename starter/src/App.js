@@ -62,11 +62,15 @@ function App() {
     },
   ];
   const updateBookShelf = (book, newShelf) => {
-    const foundBook = booksArray.find(({ id }) => id === book.id);
-    foundBook.shelf = newShelf;
-    console.log(foundBook);
-    console.log(booksArray);
-    setBooksArray(booksArray);
+    const updatedBooks = booksArray.map((b) => {
+      if (b.id === book.id) {
+        book.shelf = newShelf;
+        return book;
+      }
+      return b;
+    });
+
+    setBooksArray(updatedBooks);
   };
   const [showSearchPage, setShowSearchpage] = useState(false);
   const [booksArray, setBooksArray] = useState(initialListofBooks);
