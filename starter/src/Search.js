@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
-const Search = ({ books, setShowSearchpage, updateBookShelf }) => {
+const Search = ({ books, updateBookShelf }) => {
   const [query, setQuery] = useState("");
   const [searchedBooks, setSearchedBooks] = useState([]);
   useEffect(() => {
