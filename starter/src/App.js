@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Main from "./Main";
 import Search from "./Search";
 import * as BooksAPI from "./BooksAPI";
-
+import { Route, Routes } from "react-router";
 function App() {
   useEffect(() => {
     BooksAPI.getAll().then((result) => {
@@ -25,28 +25,22 @@ function App() {
       setBooksArray(updatedBooks);
     });
   };
-  const [showSearchPage, setShowSearchpage] = useState(false);
   const [booksArray, setBooksArray] = useState([]);
 
   return (
     <div className="app">
-      {showSearchPage ? (
-        <Search
-          books={booksArray}
-          setShowSearchpage={setShowSearchpage}
-          updateBookShelf={updateBookShelf}
-        />
-      ) : (
+      <Routes>
+        <Search books={booksArray} updateBookShelf={updateBookShelf} />
         <div className="list-books">
           <Header />
           <div className="list-books-content">
             <Main books={booksArray} updateBookShelf={updateBookShelf} />
           </div>
           <div className="open-search">
-            <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
+            <a>Add a book</a>
           </div>
         </div>
-      )}
+      </Routes>
     </div>
   );
 }
