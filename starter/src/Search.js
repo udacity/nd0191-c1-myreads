@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
 import { Link } from "react-router-dom";
+import { useDebounce } from "use-debounce";
 const Search = ({ books, updateBookShelf }) => {
   const [query, setQuery] = useState("");
   const [searchedBooks, setSearchedBooks] = useState([]);
+  const [debouncedQuery] = useDebounce(query, 500);
   useEffect(() => {
-    if (query) {
-      BooksAPI.search(query).then((data) => {
+    if (debouncedQuery) {
+      BooksAPI.search(debouncedQuery).then((data) => {
         if (data && !data.error) {
           // assign shelf to searched books
           const mergedBooks = data.map((book) => {
@@ -25,7 +27,7 @@ const Search = ({ books, updateBookShelf }) => {
     } else {
       setSearchedBooks([]);
     }
-  }, [query]);
+  }, [debouncedQuery]);
   return (
     <div className="search-books">
       <div className="search-books-bar">
