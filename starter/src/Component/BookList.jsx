@@ -1,9 +1,9 @@
 import React from "react";
 import EachBook from "./EachBook";
 
-export default function BookList({ booklist, value }) {
+export default function BookList({ booklist, value,addBook }) {
 
-  return booklist.length == 0 ? 
+  return !booklist ? 
   (
     <div class='spinner-border' role='status'>
       <span class='sr-only'>Loading...</span>
@@ -11,7 +11,7 @@ export default function BookList({ booklist, value }) {
   ) : (
     <ol className='books-grid'>
       {booklist.map((book) => {
-        return <EachBook key={book.id} book={book} value={value} />;
+        return <EachBook key={book.id} book={book} value={value} addBook={addBook} />;
       })}
     </ol>
   );
