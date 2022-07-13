@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import BookShelf from "../Component/BookShelf";
 
-export default function HomeScreen({ allBooks }) {
+export default function HomeScreen() {
+  
   const [currentRead, setcurrentRead] = useState(
     JSON.parse(localStorage.getItem("currentlyReading"))
   );
@@ -45,11 +46,7 @@ export default function HomeScreen({ allBooks }) {
             booklist={wantRead}
             addBook={addBook}
           />
-          <BookShelf
-            title={"Read"}
-            booklist={read}
-            addBook={addBook}
-          />
+          <BookShelf title={"Read"} booklist={read} addBook={addBook} />
         </div>
 
         <div className='open-search'>

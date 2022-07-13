@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import EachBook from "./EachBook";
 
 export default function BookList({ booklist, addBook }) {
@@ -54,4 +56,8 @@ export default function BookList({ booklist, addBook }) {
       })}
     </ol>
   );
+}
+BookList.propTypes = {
+  booklist :PropTypes.array.isRequired,
+  addBook:PropTypes.func,
 }

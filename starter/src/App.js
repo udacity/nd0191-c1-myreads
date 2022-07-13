@@ -30,7 +30,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path='/' element={<HomeScreen allBooks={allBooks} />} />
+      <Route path='/' element={<HomeScreen/>} />
       <Route path='/search' element={<SearchPage booklist={allBooks} />} />
     </Routes>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import BookList from "./BookList";
 
 export default function BookShelf({ title, booklist, addBook }) {
@@ -10,4 +11,9 @@ export default function BookShelf({ title, booklist, addBook }) {
       </div>
     </div>
   );
+}
+BookShelf.propTypes = {
+  title:PropTypes.string.isRequired,
+  booklist :PropTypes.array.isRequired,
+  addBook:PropTypes.func.isRequired,
 }

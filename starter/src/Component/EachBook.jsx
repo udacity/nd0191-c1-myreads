@@ -1,15 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import DropDown from "./DropDown";
 
-export default function EachBook({ book, value: bookshelf, addBook }) {
+export default function EachBook({ book,bookshelf, addBook }) {
   const handleSelectChange = (e) => {
     if (bookshelf) {
       // if the user choose the same bookshelf
-      if (bookshelf == e.target.value) return;
+      if (bookshelf === e.target.value) return;
 
       //get the book current shelf and remove it
-      const currentlyBookShelf = JSON.parse(localStorage.getItem(bookshelf));
-      RemoveBookFromSheilf(currentlyBookShelf, bookshelf);
+      RemoveBookFromSheilf(bookshelf);
     }
 
     ////////////// after removing the book from other shelf////////
@@ -26,7 +27,8 @@ export default function EachBook({ book, value: bookshelf, addBook }) {
     }
   };
 
-  const RemoveBookFromSheilf = (Bookarray, categoryOfBook) => {
+  const RemoveBookFromSheilf = (categoryOfBook) => {
+    let Bookarray = JSON.parse(localStorage.getItem(categoryOfBook));
     let switchedIndex = Bookarray.findIndex((e) => e.id === book.id);
     if (switchedIndex > -1) {
       Bookarray.splice(switchedIndex, 1);
@@ -59,4 +61,9 @@ export default function EachBook({ book, value: bookshelf, addBook }) {
       </div>
     </li>
   );
+}
+EachBook.propTypes = {
+  book :PropTypes.object.isRequired,
+  addBook:PropTypes.func,
+  bookshelf:PropTypes.string
 }
