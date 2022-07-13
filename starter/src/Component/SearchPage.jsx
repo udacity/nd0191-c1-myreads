@@ -19,7 +19,7 @@ export default function SearchPage({ booklist }) {
         </div>
       </div>
       <div className='search-books-results'>
-        <BookList booklist={search}  />
+        <BookList booklist={search}   />
       </div>
     </div>
   );

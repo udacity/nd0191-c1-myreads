@@ -48,7 +48,6 @@ export default function HomeScreen({ allBooks }) {
           <BookShelf
             title={"Read"}
             booklist={read}
-            value='read'
             addBook={addBook}
           />
         </div>
