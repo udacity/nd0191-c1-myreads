@@ -1,8 +1,16 @@
 import React from "react";
 import { useShelf } from "../context/ShelfContext";
+import { update } from "../utils/BooksAPI";
 
-const Book = () => {
-  const { addTo } = useShelf();
+const Book = ({ book, setRevaildate }) => {
+  const { stateShelfUpdate } = useShelf();
+
+  // Detrmine which shelf
+  const updateShelf = async (book, shelf) => {
+    let data = await update(book, shelf);
+    stateShelfUpdate(data);
+    setRevaildate(Math.floor(Math.random() * 999));
+  };
 
   return (
     <div className="book">
@@ -18,14 +26,11 @@ const Book = () => {
         ></div>
         <div className="book-shelf-changer">
           <select
-            value="none"
+            value={book.shelf}
             onChange={(e) => {
-              console.log("target" + e.target.value);
-
-              addTo(e.target.value, "111");
+              updateShelf(book, e.target.value);
             }}
           >
-            <option>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>
             <option value="read">Read</option>

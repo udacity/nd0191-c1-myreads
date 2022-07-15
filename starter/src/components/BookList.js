@@ -1,17 +1,22 @@
 import React from "react";
 import Book from "./Book";
+import PropTypes from "prop-types";
 
-const BookList = () => {
+const BookList = ({ Books, setRevaildate }) => {
   return (
     <ol className="books-grid">
-      <li>
-        <Book />
-      </li>
-      <li>
-        <Book />
-      </li>
+      {Books?.length > 0 &&
+        Books.map((book, index) => (
+          <li key={book.id}>
+            <Book book={book} setRevaildate={setRevaildate} />
+          </li>
+        ))}
     </ol>
   );
 };
 
 export default BookList;
+BookList.prototype = {
+  Books: PropTypes.array.isRequired,
+  setRevaildate: PropTypes.func,
+};

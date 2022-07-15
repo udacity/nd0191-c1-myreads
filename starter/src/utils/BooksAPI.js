@@ -14,11 +14,14 @@ export const get = (bookId) =>
     .then((res) => res.json())
     .then((data) => data.book);
 
-export const getAll = () =>
-  fetch(`${api}/books`, { headers })
-    .then((res) => res.json())
-    .then((data) => data.books);
-
+export const getAll = async () => {
+  let res = await fetch(`${api}/books`, { headers });
+  let data = await res.json();
+  if (data.books) {
+    return data?.books;
+  }
+  return [];
+};
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {
     method: "PUT",
@@ -29,14 +32,18 @@ export const update = (book, shelf) =>
     body: JSON.stringify({ shelf }),
   }).then((res) => res.json());
 
-export const search = (query, maxResults) =>
-  fetch(`${api}/search`, {
+export const search = async (query, maxResults) => {
+  let res = await fetch(`${api}/search`, {
     method: "POST",
     headers: {
       ...headers,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ query, maxResults }),
-  })
-    .then((res) => res.json())
-    .then((data) => data.books);
+  });
+  let data = await res.json();
+  if (Array.isArray(data.books)) {
+    return data?.books;
+  }
+  return [];
+};
