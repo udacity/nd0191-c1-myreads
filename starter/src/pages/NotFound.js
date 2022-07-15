@@ -11,14 +11,11 @@ const NotFound = () => {
       </div>
       <div className="not-found">
         <h1>
-          No Match for <strong>{location.pathname}</strong> !
+          No Matches for <strong>{location.pathname}</strong> !
         </h1>
         <Link to={`/`} className="rmdecoraton">
           <div className="return-home">
-            <a href="!#" className="close-search">
-              Close
-            </a>{" "}
-            Return Home
+            <span className="close-search">Close</span> Return Home
           </div>
         </Link>
       </div>
