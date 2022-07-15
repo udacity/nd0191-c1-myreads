@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import BookList from "../components/BookList";
 import SearchInput from "../components/SearchInput";
 
-const SearchBooks = ({ setShowSearchpage }) => {
+const BookAdd = () => {
   return (
     <div className="search-books">
       <div className="search-books-bar">
@@ -22,4 +22,4 @@ const SearchBooks = ({ setShowSearchpage }) => {
   );
 };
 
-export default SearchBooks;
+export default BookAdd;

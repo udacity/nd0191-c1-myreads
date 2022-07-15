@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BookList from "../components/BookList";
 
-const Home = ({ setShowSearchpage }) => {
+const Home = () => {
   return (
     <div className="list-books">
       <div className="list-books-title">
@@ -31,9 +31,7 @@ const Home = ({ setShowSearchpage }) => {
         </div>
       </div>
       <div className="open-search">
-        <Link to={`/add-contact`}>
-          <a href="!#">Add a book</a>
-        </Link>
+        <Link to={`/add-contact`}>Add a book</Link>
       </div>
     </div>
   );
