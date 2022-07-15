@@ -32,7 +32,7 @@ const Home = ({ setShowSearchpage }) => {
       </div>
       <div className="open-search">
         <Link to={`/add-contact`}>
-          <a>Add a book</a>
+          <a href="!#">Add a book</a>
         </Link>
       </div>
     </div>

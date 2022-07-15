@@ -9,7 +9,9 @@ const SearchBooks = ({ setShowSearchpage }) => {
       <div className="search-books-bar">
         <Link to={`/`}>
           {" "}
-          <a className="close-search">Close</a>
+          <a href="!#" className="close-search">
+            Close
+          </a>
         </Link>
         <SearchInput />
       </div>
