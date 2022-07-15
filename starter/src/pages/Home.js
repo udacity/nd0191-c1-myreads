@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useShelf } from "./../context/ShelfContext";
 import BookList from "../components/BookList";
 
 const Home = () => {
+  const { state } = useShelf();
+  let shelfs = state && Object.keys(state);
+
   return (
     <div className="list-books">
       <div className="list-books-title">
@@ -10,24 +14,14 @@ const Home = () => {
       </div>
       <div className="list-books-content">
         <div>
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Currently Reading</h2>
-            <div className="bookshelf-books">
-              <BookList />
+          {shelfs?.map((item, i) => (
+            <div className="bookshelf" key={item}>
+              <h2 className="bookshelf-title">{item}</h2>
+              <div className="bookshelf-books">
+                <BookList Books={state[item]} />
+              </div>
             </div>
-          </div>
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Want to Read</h2>
-            <div className="bookshelf-books">
-              <BookList />
-            </div>
-          </div>
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Read</h2>
-            <div className="bookshelf-books">
-              <BookList />
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       <div className="open-search">

@@ -35,7 +35,10 @@ const BookAdd = () => {
         <SearchInput Query={Query} setQuery={setQuery} />
       </div>
       <div className="search-books-results">
-        <BookList Books={Books} setRevaildate={setRevaildate} />
+        <BookList
+          Books={Books.map((k, i) => k.id)}
+          setRevaildate={setRevaildate}
+        />
       </div>
     </div>
   );

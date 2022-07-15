@@ -9,10 +9,13 @@ const headers = {
   Authorization: token,
 };
 
-export const get = (bookId) =>
-  fetch(`${api}/books/${bookId}`, { headers })
-    .then((res) => res.json())
-    .then((data) => data.book);
+export const get = async (bookId) => {
+  let res = await fetch(`${api}/books/${bookId}`, { headers });
+  let data = await res.json();
+  if (data.book) {
+    return data.book;
+  }
+};
 
 export const getAll = async () => {
   let res = await fetch(`${api}/books`, { headers });
