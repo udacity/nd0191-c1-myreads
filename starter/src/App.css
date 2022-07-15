@@ -175,3 +175,34 @@ body,
   text-align: center;
   font-size: 0.8em;
 }
+.not-found {
+display: flex;
+flex-direction: column;
+width: 100%;
+height: 80vh;
+align-items: center;
+justify-content: center;
+padding:20px auto;
+}
+.not-found .return-home {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  cursor: pointer;
+color: #999;
+}
+a.rmdecoraton {
+  text-decoration: none;
+
+}
+.not-found h1 {
+min-width: 300px;
+font-size: large;
+text-align: center;
+
+}
+.not-found h1 strong {
+  color: red;
+  text-decoration: line-through;
+  font-size: larger;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import BookList from "../components/BookList";
 
 const Home = ({ setShowSearchpage }) => {
@@ -30,9 +31,9 @@ const Home = ({ setShowSearchpage }) => {
         </div>
       </div>
       <div className="open-search">
-        <a href="!#" onClick={() => setShowSearchpage((prev) => !prev)}>
-          Add a book
-        </a>
+        <Link to={`/add-contact`}>
+          <a>Add a book</a>
+        </Link>
       </div>
     </div>
   );
