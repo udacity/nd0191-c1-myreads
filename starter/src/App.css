@@ -206,3 +206,17 @@ text-align: center;
   text-decoration: line-through;
   font-size: larger;
 }
+
+.Details {
+  display: flex;
+gap: 5px;
+height: 100vh;  
+
+}
+.Details div {
+  flex: 1 1 0;
+}
+.Details div img {
+  width: 100%;
+  height: 100%;
+}
