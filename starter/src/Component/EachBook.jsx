@@ -51,7 +51,7 @@ export default function EachBook({ book,bookshelf, addBook }) {
           <DropDown value={bookshelf} handleSelectChange={handleSelectChange} />
         </div>
         <div className='book-title'>{book.title}</div>
-        {book.authors.map((val, i) => {
+        {book.authors && book.authors.map((val, i) => {
           return (
             <div key={i} className='book-authors'>
               {val}

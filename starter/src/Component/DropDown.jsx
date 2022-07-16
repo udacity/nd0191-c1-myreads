@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default function DropDown({ value, handleSelectChange }) {
-  const [selectValue, setSelectValue] = React.useState(null);
+  const [selectValue, setSelectValue] = React.useState("none");
 
   React.useEffect(() => {
-    value ? setSelectValue(value) : setSelectValue("none");
-  },[value]);
+    value && setSelectValue(value);
+  }, [value]);
   return (
     <div className='book-shelf-changer'>
       <select value={selectValue} onChange={handleSelectChange}>
@@ -22,6 +22,6 @@ export default function DropDown({ value, handleSelectChange }) {
   );
 }
 DropDown.propTypes = {
-  value :PropTypes.string,
-  handleSelectChange:PropTypes.func.isRequired,
-}
+  value: PropTypes.string,
+  handleSelectChange: PropTypes.func.isRequired,
+};

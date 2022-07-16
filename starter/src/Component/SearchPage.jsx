@@ -1,21 +1,30 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import BookList from "./BookList";
 import * as BookApi from "../BooksAPI";
 
-export default function SearchPage({ booklist }) {
+export default function SearchPage() {
   const [search, setSearch] = React.useState([]);
 
   React.useEffect(() => {
-    setSearch(booklist);
-    //Get All Books From API
-    //  const getBooks = async () => {
-    //   const res = await BookApi.search("",booklist.length)
-    //   setSearch(res);
-    // };
-    // getBooks();
-  }, [booklist]);
+    getBooks();
+  }, []);
+
+  //Get All Books From API
+  const getBooks = async () => {
+    const res = await BookApi.getAll();
+    setSearch(res);
+  };
+  const SeachText = async (e) => {
+    if (e.target.value === "") getBooks();
+    //Search From API
+    const res = await BookApi.search(e.target.value, 20);
+    if (Array.isArray(res)) {
+      setSearch(res);
+    } else {
+      setSearch([]);
+    }
+  };
 
   return (
     <div className='search-books'>
@@ -24,15 +33,16 @@ export default function SearchPage({ booklist }) {
           Close
         </a>
         <div className='search-books-input-wrapper'>
-          <input type='text' placeholder='Search by title, author, or ISBN' />
+          <input
+            type='text'
+            placeholder='Search by title, author, or ISBN'
+            onChange={SeachText}
+          />
         </div>
       </div>
       <div className='search-books-results'>
-        <BookList booklist={search} />
+        <BookList booklist={search}  />
       </div>
     </div>
   );
 }
-SearchPage.propTypes = {
-  booklist: PropTypes.array.isRequired,
-};
