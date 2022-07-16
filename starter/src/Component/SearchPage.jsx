@@ -21,6 +21,7 @@ export default function SearchPage() {
     const res = await BookApi.search(e.target.value, 20);
     if (Array.isArray(res)) {
       setSearch(res);
+      console.log(res)
     } else {
       setSearch([]);
     }
