@@ -14,7 +14,7 @@ export default function BookList({ booklist, addBook }) {
         <span className='sr-only'></span>
       </div>
     </div>
-  ) : booklist.length == 0 ? (
+  ) : booklist.length === 0 ? (
     <div className='container-fluid d-flex justify-content-center'>
       <div className='row'>
         <div className='col-md-12'>
