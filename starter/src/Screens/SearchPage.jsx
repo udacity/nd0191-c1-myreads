@@ -1,6 +1,6 @@
 import React from "react";
 
-import BookList from "./BookList";
+import BookList from "../Component/BookList";
 import * as BookApi from "../BooksAPI";
 
 export default function SearchPage() {

@@ -3,7 +3,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import HomeScreen from "./Screens/HomeScreen";
-import SearchPage from "./Component/SearchPage";
+import SearchPage from "./Screens/SearchPage";
 
 function App() {
   React.useEffect(() => {
