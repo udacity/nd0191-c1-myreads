@@ -28,13 +28,14 @@ export default function BookList({ booklist, addBook }) {
                   width='130'
                   height='130'
                   className='img-fluid mb-4 mr-3'
+                  alt="Not Found img"
                 />
                 <h3>
                   <strong>No Book Found</strong>
                 </h3>
                 <a
                   href='/'
-                  className='btn btn-sucess cart-btn-transform m-3'
+                  className='btn btn-success cart-btn-transform m-3'
                   data-abc='true'>
                   Back To My Shelf
                 </a>
