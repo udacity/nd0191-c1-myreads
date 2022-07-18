@@ -6,7 +6,7 @@ import DropDown from "./DropDown";
 
 export default function EachBook({ book, bookshelf, addBook }) {
   const [shelf, setShelf] = React.useState(bookshelf);
-  
+
   const handleSelectChange = (e) => {
     if (shelf) {
       // if the user choose the same bookshelf
@@ -16,7 +16,7 @@ export default function EachBook({ book, bookshelf, addBook }) {
       RemoveBookFromSheilf(shelf);
     }
 
-    ////////////// after removing the book from other shelf////////
+    //////////////After removing the book from other shelf////////
     //adding the book to the new  shelf
     if (e.target.value !== "none") {
       const updatingBookSelf = JSON.parse(localStorage.getItem(e.target.value));
