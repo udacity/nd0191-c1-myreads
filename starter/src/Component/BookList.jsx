@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import PropTypes from "prop-types";
 
 import EachBook from "./EachBook";
@@ -7,6 +9,17 @@ export default function BookList({ booklist, addBook }) {
   let currentlyReading = JSON.parse(localStorage.getItem("currentlyReading"));
   let wantToRead = JSON.parse(localStorage.getItem("wantToRead"));
   let read = JSON.parse(localStorage.getItem("read"));
+
+  const element = (book, bookshelf) => {
+    return (
+      <EachBook
+        key={book.id}
+        book={book}
+        bookshelf={bookshelf}
+        addBook={addBook}
+      />
+    );
+  };
 
   return booklist == null ? (
     <div className='d-flex justify-content-center'>
@@ -22,23 +35,20 @@ export default function BookList({ booklist, addBook }) {
             {addBook ? (
               <h5>No Book Yet</h5>
             ) : (
-              <div>
+              <div className='m-4'>
                 <img
                   src='https://cdn-icons-png.flaticon.com/512/1178/1178479.png'
                   width='130'
                   height='130'
                   className='img-fluid mb-4 mr-3'
-                  alt="Not Found img"
+                  alt='Not Found img'
                 />
                 <h3>
                   <strong>No Book Found</strong>
                 </h3>
-                <a
-                  href='/'
-                  className='btn btn-success cart-btn-transform m-3'
-                  data-abc='true'>
+                <Link to='/' className='btn btn-success cart-btn-transform m-3'>
                   Back To My Shelf
-                </a>
+                </Link>
               </div>
             )}
           </div>
@@ -49,32 +59,11 @@ export default function BookList({ booklist, addBook }) {
     <ol className='books-grid'>
       {booklist.map((book) => {
         if (currentlyReading.findIndex((e) => e.id === book.id) > -1) {
-          return (
-            <EachBook
-              key={book.id}
-              book={book}
-              bookshelf='currentlyReading'
-              addBook={addBook}
-            />
-          );
+          return element(book, "currentlyReading");
         } else if (wantToRead.findIndex((e) => e.id === book.id) > -1) {
-          return (
-            <EachBook
-              key={book.id}
-              book={book}
-              bookshelf='wantToRead'
-              addBook={addBook}
-            />
-          );
+          return element(book, "wantToRead");
         } else if (read.findIndex((e) => e.id === book.id) > -1) {
-          return (
-            <EachBook
-              key={book.id}
-              book={book}
-              bookshelf='read'
-              addBook={addBook}
-            />
-          );
+          return element(book, "read");
         } else {
           return <EachBook key={book.id} book={book} addBook={addBook} />;
         }

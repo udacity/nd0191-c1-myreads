@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 import BookList from "../Component/BookList";
 import * as BookApi from "../BooksAPI";
@@ -6,19 +8,12 @@ import * as BookApi from "../BooksAPI";
 export default function SearchPage() {
   const [search, setSearch] = React.useState([]);
 
-  React.useEffect(() => {
-    getBooks();
-  }, []);
-
-  //Get All Books From API
-  const getBooks = async () => {
-    const res = await BookApi.getAll();
-    setSearch(res);
-  };
-  const SeachText = async (e) => {
-    if (e.target.value === "") getBooks();
+  const SearchText = async (e) => {
+    if (e.target.value === "") setSearch([]);
     //Search From API
-    const res = await BookApi.search(e.target.value, 20);
+    const res = await BookApi.search(e.target.value, 20).catch(() =>
+      setSearch([])
+    );
     if (Array.isArray(res)) {
       setSearch(res);
     } else {
@@ -29,14 +24,14 @@ export default function SearchPage() {
   return (
     <div className='search-books'>
       <div className='search-books-bar'>
-        <a className='close-search' href='/'>
+        <Link className='close-search' to='/'>
           Close
-        </a>
+        </Link>
         <div className='search-books-input-wrapper'>
           <input
             type='text'
             placeholder='Search by title, author, or ISBN'
-            onChange={SeachText}
+            onChange={SearchText}
           />
         </div>
       </div>

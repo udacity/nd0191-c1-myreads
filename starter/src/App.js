@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 import HomeScreen from "./Screens/HomeScreen";
 import SearchPage from "./Screens/SearchPage";
+import NoMatch from "./Screens/NoMatch";
 
 function App() {
   React.useEffect(() => {
@@ -22,6 +23,7 @@ function App() {
     <Routes>
       <Route path='/' element={<HomeScreen />} />
       <Route path='/search' element={<SearchPage />} />
+      <Route path="*" element={<NoMatch/>} />
     </Routes>
   );
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import BookShelf from "../Component/BookShelf";
 
@@ -50,7 +51,7 @@ export default function HomeScreen() {
         </div>
 
         <div className='open-search'>
-          <a href='/search'>Add a book</a>
+          <Link to='/search'>Add a book</Link>
         </div>
       </div>
     </div>

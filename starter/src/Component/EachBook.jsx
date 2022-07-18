@@ -1,16 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as BookApi from "../BooksAPI";
 
 import DropDown from "./DropDown";
 
-export default function EachBook({ book,bookshelf, addBook }) {
+export default function EachBook({ book, bookshelf, addBook }) {
+  const [shelf, setShelf] = React.useState(bookshelf);
+  
   const handleSelectChange = (e) => {
-    if (bookshelf) {
+    if (shelf) {
       // if the user choose the same bookshelf
-      if (bookshelf === e.target.value) return;
+      if (shelf === e.target.value) return;
 
       //get the book current shelf and remove it
-      RemoveBookFromSheilf(bookshelf);
+      RemoveBookFromSheilf(shelf);
     }
 
     ////////////// after removing the book from other shelf////////
@@ -20,10 +23,13 @@ export default function EachBook({ book,bookshelf, addBook }) {
 
       //adding the book to the array
       updatingBookSelf.push(book);
+      BookApi.update(book, e.target.value);
       localStorage.setItem(e.target.value, JSON.stringify(updatingBookSelf));
 
       //To setSate in HomeScreen
       addBook && addBook(e.target.value, updatingBookSelf);
+
+      setShelf(e.target.value);
     }
   };
 
@@ -46,24 +52,26 @@ export default function EachBook({ book,bookshelf, addBook }) {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${book.imageLinks.thumbnail})`,
+              backgroundImage:
+                book.imageLinks && `url(${book.imageLinks.thumbnail})`,
             }}></div>
-          <DropDown value={bookshelf} handleSelectChange={handleSelectChange} />
+          <DropDown value={shelf} handleSelectChange={handleSelectChange} />
         </div>
         <div className='book-title'>{book.title}</div>
-        {book.authors && book.authors.map((val, i) => {
-          return (
-            <div key={i} className='book-authors'>
-              {val}
-            </div>
-          );
-        })}
+        {book.authors &&
+          book.authors.map((val, i) => {
+            return (
+              <div key={i} className='book-authors'>
+                {val}
+              </div>
+            );
+          })}
       </div>
     </li>
   );
 }
 EachBook.propTypes = {
-  book :PropTypes.object.isRequired,
-  addBook:PropTypes.func,
-  bookshelf:PropTypes.string
-}
+  book: PropTypes.object.isRequired,
+  addBook: PropTypes.func,
+  bookshelf: PropTypes.string,
+};
