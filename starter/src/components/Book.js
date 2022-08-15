@@ -8,8 +8,8 @@ const Book = ({ title, author, imgSrc }) => {
         <div
           className="book-cover"
           style={{
-            width: 128,
-            height: 193,
+            width: 200,
+            height: 200,
             backgroundImage: { imgSrc },
           }}
         ></div>
