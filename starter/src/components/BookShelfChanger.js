@@ -10,7 +10,7 @@ const BookShelfChanger = () => {
 
   return (
     <div className="book-shelf-changer">
-      <select value={shelf} onChange={handleChange}>
+      <select>
         <option value="none" disabled>
           Move to...
         </option>
