@@ -1,8 +1,17 @@
+import { useNavigate } from "react-router-dom";
+
 const SearchBooks = () => {
+  let navigate = useNavigate();
+
+  const handleReturnLibrary = () => {
+    navigate("/");
+  };
   return (
     <div className="search-books">
       <div className="search-books-bar">
-        <a className="close-search">Close</a>
+        <a onClick={() => handleReturnLibrary()} className="close-search">
+          Close
+        </a>
         <div className="search-books-input-wrapper">
           <input type="text" placeholder="Search by title, author, or ISBN" />
         </div>

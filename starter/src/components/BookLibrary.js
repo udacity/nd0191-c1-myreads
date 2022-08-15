@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Bookshelf from "./Bookshelf.js";
 
 const tempBookList = [
@@ -53,6 +54,12 @@ const tempBookList = [
 ];
 
 const BookLibrary = () => {
+  let navigate = useNavigate();
+
+  const handleAddBook = () => {
+    navigate("/search");
+  };
+
   return (
     <div className="list-books">
       <div className="list-books-title">
@@ -77,7 +84,7 @@ const BookLibrary = () => {
         </div>
       </div>
       <div className="open-search">
-        <a>Add a book</a>
+        <a onClick={() => handleAddBook()}>Add a book</a>
       </div>
     </div>
   );

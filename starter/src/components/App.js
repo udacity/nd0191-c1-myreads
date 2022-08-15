@@ -1,13 +1,16 @@
-import "../css/App.css";
+import { Route, Routes } from "react-router-dom";
 
+import "../css/App.css";
 import BookLibrary from "./BookLibrary.js";
-// import SearchBooks from "./SearchBooks.js";
+import SearchBooks from "./SearchBooks.js";
 
 function App() {
   return (
     <div className="app">
-      <BookLibrary />
-      {/* <SearchBooks /> */}
+      <Routes>
+        <Route exact path="/" element={<BookLibrary />} />
+        <Route path="/search" element={<SearchBooks />} />
+      </Routes>
     </div>
   );
 }
