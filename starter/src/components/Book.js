@@ -1,15 +1,30 @@
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import BookShelfChanger from "./BookShelfChanger.js";
 
 const Book = ({ title, authors, imgSrc }) => {
+  const [imgDims, setImgSize] = useState([]);
+
+  const getImgSize = (url) => {
+    const img = new Image();
+    img.src = url;
+    img.onload = () => {
+      setImgSize([img.width, img.height]);
+    };
+  };
+
+  useEffect(() => {
+    getImgSize(imgSrc);
+  }, []);
+
   return (
     <div className="book">
       <div className="book-top">
         <div
           className="book-cover"
           style={{
-            width: 128,
-            height: 188,
+            width: imgDims[0],
+            height: imgDims[1],
             backgroundImage: `url(${imgSrc})`,
           }}
         ></div>
