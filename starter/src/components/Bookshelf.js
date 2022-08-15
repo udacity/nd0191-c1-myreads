@@ -2,19 +2,17 @@ import PropTypes from "prop-types";
 import Book from "./Book.js";
 
 const Bookshelf = ({ title, books }) => {
-  console.log(books);
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{title}</h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
-          {books.map((book, idx) => (
-            <li key={idx}>
-              {console.log("bookshelf book", book)}
+          {books.map((book) => (
+            <li key={book.id}>
               <Book
                 title={book.title}
-                author={book.author}
-                imgSrc={book.imgSrc}
+                authors={book.authors}
+                imgSrc={book.imageLinks.thumbnail}
               />
             </li>
           ))}

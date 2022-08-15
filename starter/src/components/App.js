@@ -7,24 +7,27 @@ import BookLibrary from "./BookLibrary.js";
 import SearchBooks from "./SearchBooks.js";
 
 function App() {
-  const [books, setBooks] = useState([]);
+  const [currentBooks, setCurrentBooks] = useState([]);
 
-  console.log("app books", books);
+  console.log("app books", currentBooks);
 
   useEffect(() => {
-    const getBooks = async () => {
+    const getCurrentBooks = async () => {
       const res = await BooksAPI.getAll();
-      setBooks(res);
+      setCurrentBooks(res);
     };
-
-    getBooks();
+    getCurrentBooks();
   }, []);
 
   return (
     <div className="app">
       <Routes>
-        <Route exact path="/" element={<BookLibrary />} />
-        <Route path="/search" element={<SearchBooks books={books} />} />
+        <Route
+          exact
+          path="/"
+          element={<BookLibrary currentBooks={currentBooks} />}
+        />
+        <Route path="/search" element={<SearchBooks />} />
       </Routes>
     </div>
   );

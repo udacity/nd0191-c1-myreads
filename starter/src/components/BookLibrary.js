@@ -53,7 +53,7 @@ const tempBookList = [
   },
 ];
 
-const BookLibrary = () => {
+const BookLibrary = ({ currentBooks }) => {
   let navigate = useNavigate();
 
   const handleAddBook = () => {
@@ -69,17 +69,17 @@ const BookLibrary = () => {
         <div>
           <Bookshelf
             title={"Currently Reading"}
-            books={tempBookList.filter(
-              (book) => book.state === "currentlyReading"
+            books={currentBooks.filter(
+              (book) => book.shelf === "currentlyReading"
             )}
           />
           <Bookshelf
             title={"Want to Read"}
-            books={tempBookList.filter((book) => book.state === "wantToRead")}
+            books={currentBooks.filter((book) => book.shelf === "wantToRead")}
           />
           <Bookshelf
             title={"Read"}
-            books={tempBookList.filter((book) => book.state === "read")}
+            books={currentBooks.filter((book) => book.shelf === "read")}
           />
         </div>
       </div>

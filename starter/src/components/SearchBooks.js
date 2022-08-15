@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const SearchBooks = () => {
+const SearchBooks = ({ books }) => {
   let navigate = useNavigate();
 
   const handleReturnLibrary = () => {
