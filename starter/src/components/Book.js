@@ -8,8 +8,6 @@ const Book = ({ book, bookShelfHandler }) => {
   useEffect(() => {
     let mounted = true;
 
-    console.log("mounted ", mounted);
-
     const getImgSize = (url) => {
       const img = new Image();
       img.src = url;
