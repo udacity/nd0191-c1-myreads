@@ -51,7 +51,7 @@ const SearchBooks = ({ addBookToLibrary }) => {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {query.length > 0 && searchBooks.length > 0 ? (
+          {query.length !== "" && searchBooks.length > 0 ? (
             searchBooks.map((book) => {
               return (
                 <li key={book.id}>
@@ -60,7 +60,7 @@ const SearchBooks = ({ addBookToLibrary }) => {
               );
             })
           ) : (
-            <></>
+            <p>No books to show - search in the bar above.</p>
           )}
         </ol>
       </div>
