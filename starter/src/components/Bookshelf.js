@@ -9,7 +9,7 @@ const Bookshelf = ({ title, books, changeBookShelf }) => {
         <ol className="books-grid">
           {books.map((book) => (
             <li key={book.id}>
-              <Book book={book} changeBookShelf={changeBookShelf} />
+              <Book book={book} bookShelfHandler={changeBookShelf} />
             </li>
           ))}
         </ol>
@@ -21,6 +21,7 @@ const Bookshelf = ({ title, books, changeBookShelf }) => {
 Bookshelf.propTypes = {
   title: PropTypes.string.isRequired,
   books: PropTypes.array.isRequired,
+  changeBookShelf: PropTypes.func.isRequired,
 };
 
 export default Bookshelf;

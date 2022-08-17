@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import Bookshelf from "./Bookshelf.js";
 
@@ -39,6 +40,11 @@ const BookLibrary = ({ currentBooks, changeBookShelf }) => {
       </div>
     </div>
   );
+};
+
+BookLibrary.propTypes = {
+  currentBooks: PropTypes.array.isRequired,
+  changeBookShelf: PropTypes.func.isRequired,
 };
 
 export default BookLibrary;

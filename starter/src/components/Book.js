@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import BookShelfChanger from "./BookShelfChanger.js";
 
-const Book = ({ book, changeBookShelf }) => {
+const Book = ({ book, bookShelfHandler }) => {
   const [imgDims, setImgSize] = useState([]);
 
   const getImgSize = (url) => {
@@ -28,13 +28,14 @@ const Book = ({ book, changeBookShelf }) => {
             backgroundImage: `url(${book.imageLinks.thumbnail})`,
           }}
         ></div>
-        <BookShelfChanger book={book} changeBookShelf={changeBookShelf} />
+        <BookShelfChanger book={book} bookShelfHandler={bookShelfHandler} />
       </div>
       <div className="book-title">{book.title}</div>
       <div className="book-authors">
-        {book.authors.map((author, idx) => (
-          <span key={idx}>{(idx ? ", " : "") + author} </span>
-        ))}
+        {book.authors &&
+          book.authors.map((author, idx) => (
+            <span key={idx}>{(idx ? ", " : "") + author} </span>
+          ))}
       </div>
     </div>
   );
@@ -42,6 +43,7 @@ const Book = ({ book, changeBookShelf }) => {
 
 Book.propTypes = {
   book: PropTypes.object.isRequired,
+  bookShelfHandler: PropTypes.func.isRequired,
 };
 
 export default Book;
