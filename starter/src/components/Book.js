@@ -17,7 +17,7 @@ const Book = ({ book, bookShelfHandler }) => {
         }
       };
     };
-    if (imgSrc && mounted) {
+    if (book.imageLinks && book.imageLinks.thumbnail && mounted) {
       getImgSize(book.imageLinks.thumbnail);
     }
 
@@ -26,36 +26,38 @@ const Book = ({ book, bookShelfHandler }) => {
     };
   }, []);
 
-  const imgSrc =
-    book.imageLinks && book.imageLinks.thumbnail
-      ? `url(${book.imageLinks.thumbnail})`
-      : null;
-
   return (
     <div className="book">
       <div className="book-top">
-        <div
-          className="book-cover"
-          style={{
-            width: imgDims[0],
-            height: imgDims[1],
-            backgroundImage: imgSrc,
-          }}
-        />
+        {book.imageLinks && book.imageLinks.thumbnail ? (
+          <div
+            className="book-cover"
+            style={{
+              width: imgDims[0],
+              height: imgDims[1],
+              backgroundImage: `url(${book.imageLinks.thumbnail})`,
+            }}
+          />
+        ) : (
+          <div className="book-cover-missing">
+            <p>Book cover unavailable</p>
+          </div>
+        )}
+
         <BookShelfChanger book={book} bookShelfHandler={bookShelfHandler} />
       </div>
       <div className="book-title">
         {book.title ? book.title : "Title unavailable"}
       </div>
-      {book.authors ? (
-        <div className="book-authors">
-          {book.authors.map((author, idx) => (
+      <div className="book-authors">
+        {book.authors ? (
+          book.authors.map((author, idx) => (
             <span key={idx}>{(idx ? ", " : "") + author} </span>
-          ))}
-        </div>
-      ) : (
-        <></>
-      )}
+          ))
+        ) : (
+          <p>[Author(s) Unavailable]</p>
+        )}
+      </div>
     </div>
   );
 };

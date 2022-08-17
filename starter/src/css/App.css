@@ -171,6 +171,16 @@ body,
   background: #eee;
 }
 
+.book-cover-missing {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #c1c1c1;
+  width: 120px;
+  height: 180px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
 .book-cover-title {
   padding: 20px 10px 0;
   text-align: center;

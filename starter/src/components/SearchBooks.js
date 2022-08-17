@@ -6,7 +6,7 @@ import * as BooksAPI from "../BooksAPI.js";
 
 import Book from "./Book.js";
 
-const MAX_BOOKS = 30;
+const MAX_BOOKS = 50;
 
 const SearchBooks = ({ addBookToLibrary }) => {
   const [searchBooks, setSearchBooks] = useState([]);
