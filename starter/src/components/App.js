@@ -10,11 +10,18 @@ function App() {
   const [currentBooks, setCurrentBooks] = useState([]);
 
   useEffect(() => {
+    let mounted = true;
+
     const getCurrentBooks = async () => {
       const res = await BooksAPI.getAll();
-      setCurrentBooks(res);
+      if (mounted) {
+        setCurrentBooks(res);
+      }
     };
     getCurrentBooks();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const addBookToLibrary = (book, shelf) => {

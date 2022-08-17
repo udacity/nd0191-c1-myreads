@@ -5,16 +5,22 @@ import BookShelfChanger from "./BookShelfChanger.js";
 const Book = ({ book, bookShelfHandler }) => {
   const [imgDims, setImgSize] = useState([]);
 
-  const getImgSize = (url) => {
-    const img = new Image();
-    img.src = url;
-    img.onload = () => {
-      setImgSize([img.width, img.height]);
-    };
-  };
-
   useEffect(() => {
+    let mounted = true;
+    const getImgSize = (url) => {
+      if (mounted) {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => {
+          setImgSize([img.width, img.height]);
+        };
+      }
+    };
     getImgSize(book.imageLinks.thumbnail);
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (
