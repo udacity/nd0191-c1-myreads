@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const BookShelfChanger = ({ book, bookShelfHandler }) => {
   const [shelf, setShelf] = useState("none");
@@ -21,6 +22,11 @@ const BookShelfChanger = ({ book, bookShelfHandler }) => {
       </select>
     </div>
   );
+};
+
+BookShelfChanger.propTypes = {
+  book: PropTypes.object.isRequired,
+  bookShelfHandler: PropTypes.func.isRequired,
 };
 
 export default BookShelfChanger;
