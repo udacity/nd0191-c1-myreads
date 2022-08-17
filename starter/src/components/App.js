@@ -9,8 +9,6 @@ import SearchBooks from "./SearchBooks.js";
 function App() {
   const [currentBooks, setCurrentBooks] = useState([]);
 
-  console.log("app books", currentBooks);
-
   useEffect(() => {
     const getCurrentBooks = async () => {
       const res = await BooksAPI.getAll();
@@ -19,13 +17,29 @@ function App() {
     getCurrentBooks();
   }, []);
 
+  const changeBookShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf);
+    const updatedBookList = currentBooks.map((currBook) => {
+      if (currBook.id === book.id) {
+        currBook.shelf = shelf;
+      }
+      return currBook;
+    });
+    setCurrentBooks(updatedBookList);
+  };
+
   return (
     <div className="app">
       <Routes>
         <Route
           exact
           path="/"
-          element={<BookLibrary currentBooks={currentBooks} />}
+          element={
+            <BookLibrary
+              currentBooks={currentBooks}
+              changeBookShelf={changeBookShelf}
+            />
+          }
         />
         <Route path="/search" element={<SearchBooks />} />
       </Routes>

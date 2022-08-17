@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import BookShelfChanger from "./BookShelfChanger.js";
 
-const Book = ({ title, authors, imgSrc }) => {
+const Book = ({ book, changeBookShelf }) => {
   const [imgDims, setImgSize] = useState([]);
 
   const getImgSize = (url) => {
@@ -14,7 +14,7 @@ const Book = ({ title, authors, imgSrc }) => {
   };
 
   useEffect(() => {
-    getImgSize(imgSrc);
+    getImgSize(book.imageLinks.thumbnail);
   }, []);
 
   return (
@@ -25,14 +25,14 @@ const Book = ({ title, authors, imgSrc }) => {
           style={{
             width: imgDims[0],
             height: imgDims[1],
-            backgroundImage: `url(${imgSrc})`,
+            backgroundImage: `url(${book.imageLinks.thumbnail})`,
           }}
         ></div>
-        <BookShelfChanger />
+        <BookShelfChanger book={book} changeBookShelf={changeBookShelf} />
       </div>
-      <div className="book-title">{title}</div>
+      <div className="book-title">{book.title}</div>
       <div className="book-authors">
-        {authors.map((author, idx) => (
+        {book.authors.map((author, idx) => (
           <span key={idx}>{(idx ? ", " : "") + author} </span>
         ))}
       </div>
@@ -41,8 +41,7 @@ const Book = ({ title, authors, imgSrc }) => {
 };
 
 Book.propTypes = {
-  title: PropTypes.string.isRequired,
-  authors: PropTypes.array.isRequired,
+  book: PropTypes.object.isRequired,
 };
 
 export default Book;

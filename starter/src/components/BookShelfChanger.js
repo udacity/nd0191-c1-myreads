@@ -1,16 +1,17 @@
 import { useState } from "react";
 
-const BookShelfChanger = () => {
+const BookShelfChanger = ({ book, changeBookShelf }) => {
   const [shelf, setShelf] = useState("none");
 
   const handleChange = (e) => {
-    e.preventDefault();
-    setShelf(e.target.value);
+    const changedShelf = e.target.value;
+    setShelf(changedShelf);
+    changeBookShelf(book, changedShelf);
   };
 
   return (
     <div className="book-shelf-changer">
-      <select>
+      <select value={shelf} onChange={handleChange}>
         <option value="none" disabled>
           Move to...
         </option>
