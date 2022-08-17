@@ -7,21 +7,31 @@ const Book = ({ book, bookShelfHandler }) => {
 
   useEffect(() => {
     let mounted = true;
+
+    console.log("mounted ", mounted);
+
     const getImgSize = (url) => {
-      if (mounted) {
-        const img = new Image();
-        img.src = url;
-        img.onload = () => {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => {
+        if (mounted) {
           setImgSize([img.width, img.height]);
-        };
-      }
+        }
+      };
     };
-    getImgSize(book.imageLinks.thumbnail);
+    if (imgSrc && mounted) {
+      getImgSize(book.imageLinks.thumbnail);
+    }
 
     return () => {
       mounted = false;
     };
   }, []);
+
+  const imgSrc =
+    book.imageLinks && book.imageLinks.thumbnail
+      ? `url(${book.imageLinks.thumbnail})`
+      : null;
 
   return (
     <div className="book">
@@ -31,18 +41,23 @@ const Book = ({ book, bookShelfHandler }) => {
           style={{
             width: imgDims[0],
             height: imgDims[1],
-            backgroundImage: `url(${book.imageLinks.thumbnail})`,
+            backgroundImage: imgSrc,
           }}
-        ></div>
+        />
         <BookShelfChanger book={book} bookShelfHandler={bookShelfHandler} />
       </div>
-      <div className="book-title">{book.title}</div>
-      <div className="book-authors">
-        {book.authors &&
-          book.authors.map((author, idx) => (
+      <div className="book-title">
+        {book.title ? book.title : "Title unavailable"}
+      </div>
+      {book.authors ? (
+        <div className="book-authors">
+          {book.authors.map((author, idx) => (
             <span key={idx}>{(idx ? ", " : "") + author} </span>
           ))}
-      </div>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
