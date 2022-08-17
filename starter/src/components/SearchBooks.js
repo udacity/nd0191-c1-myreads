@@ -10,17 +10,20 @@ const MAX_BOOKS = 30;
 
 const SearchBooks = ({ addBookToLibrary }) => {
   const [searchBooks, setSearchBooks] = useState([]);
+  const [query, setQuery] = useState("");
 
   const handleSearch = (e) => {
-    e.preventDefault();
     console.log("query", e.target.value);
-    searchBook(e.target.value, MAX_BOOKS);
+    setQuery(e.target.value);
+    if (e.target.value) {
+      searchBook();
+    }
   };
 
-  const searchBook = async (query) => {
+  const searchBook = async () => {
     const res = await BooksAPI.search(query.trim(), MAX_BOOKS);
-    if (res && res.length > 0) {
-      setSearchBooks(res);
+    if (res) {
+      setSearchBooks(Array.from(res));
     }
   };
 
@@ -30,6 +33,11 @@ const SearchBooks = ({ addBookToLibrary }) => {
     navigate("/");
   };
 
+  console.log("query", query);
+  console.log("query type", typeof query);
+  console.log("search books", searchBooks);
+
+  console.log("search books", typeof searchBooks);
   return (
     <div className="search-books">
       <div className="search-books-bar">
@@ -39,6 +47,7 @@ const SearchBooks = ({ addBookToLibrary }) => {
         <div className="search-books-input-wrapper">
           <input
             type="text"
+            value={query}
             onChange={handleSearch}
             placeholder="Search by title, author, or ISBN"
           />
@@ -46,12 +55,15 @@ const SearchBooks = ({ addBookToLibrary }) => {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {searchBooks &&
+          {query ? (
             searchBooks.map((book) => (
               <li key={book.id}>
                 <Book book={book} bookShelfHandler={addBookToLibrary} />
               </li>
-            ))}
+            ))
+          ) : (
+            <></>
+          )}
         </ol>
       </div>
     </div>
