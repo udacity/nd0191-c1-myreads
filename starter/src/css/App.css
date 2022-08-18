@@ -169,7 +169,8 @@ body,
 }
 
 .selected-option {
-  background-color: #2e7c31
+  background-color: #2e7c31;
+  font-weight: bold;
 }
 
 /* book cover */

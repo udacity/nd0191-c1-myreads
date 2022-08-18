@@ -51,7 +51,7 @@ const BookShelfChanger = ({ book, handleShelfChange }) => {
               key={idx}
               value={option.value}
             >
-              {option.label}
+              -- {option.label}
             </option>
           ) : (
             <option key={idx} value={option.value}>
