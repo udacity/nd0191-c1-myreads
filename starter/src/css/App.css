@@ -42,6 +42,10 @@ body,
 .bookshelf-title {
   border-bottom: 1px solid #dedede;
 }
+.bookshelf-no-books {
+  text-align: center;
+  font-size: 18px;
+}
 .bookshelf-books {
   text-align: center;
 }
@@ -162,6 +166,10 @@ body,
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+.selected-option {
+  background-color: #2e7c31
 }
 
 /* book cover */
