@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-const shelfOptions = [
+const shelfItemsInfo = [
   { value: "currentlyReading", label: "Currently Reading" },
   { value: "wantToRead", label: "Want to Read" },
   { value: "read", label: "Read" },
@@ -10,18 +10,45 @@ const shelfOptions = [
 
 const BookShelfChanger = ({ book, handleShelfChange }) => {
   const [shelf, setShelf] = useState(book.shelf ? book.shelf : "none");
+  const [bookLocation, setBookLocation] = useState("library");
+  const [shelfOptions, setShelfOptions] = useState([]);
 
   const handleChange = (e) => {
     setShelf(e.target.value);
     handleShelfChange(book, e.target.value);
   };
 
+  useEffect(() => {
+    let mounted = true;
+
+    const getCurrentBookLocation = () => {
+      const location = book.shelf === undefined ? "search" : "library";
+      if (mounted) {
+        setBookLocation(location);
+        location === "search"
+          ? setShelfOptions(shelfItemsInfo.slice(0, 3))
+          : setShelfOptions(shelfItemsInfo);
+      }
+    };
+    getCurrentBookLocation();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  console.log("book loc", bookLocation);
   return (
     <div className="book-shelf-changer">
       <select value={shelf} onChange={(e) => handleChange(e)}>
-        <option value="none" disabled>
-          Move to...
-        </option>
+        {bookLocation === "search" ? (
+          <option value="addTo" disabled>
+            Add to...
+          </option>
+        ) : (
+          <option value="moveTo" disabled>
+            Move to...
+          </option>
+        )}
         {shelfOptions.map((option, idx) =>
           book.shelf === option.value ? (
             <option
