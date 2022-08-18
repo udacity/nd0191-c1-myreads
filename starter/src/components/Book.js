@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import BookShelfChanger from "./BookShelfChanger.js";
 
-const Book = ({ book, bookShelfHandler }) => {
+const Book = ({ book, handleShelfChange }) => {
   const [imgDims, setImgSize] = useState([]);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Book = ({ book, bookShelfHandler }) => {
           </div>
         )}
 
-        <BookShelfChanger book={book} bookShelfHandler={bookShelfHandler} />
+        <BookShelfChanger book={book} handleShelfChange={handleShelfChange} />
       </div>
       <div className="book-title">
         {book.title ? book.title : "Title unavailable"}
@@ -64,7 +64,7 @@ const Book = ({ book, bookShelfHandler }) => {
 
 Book.propTypes = {
   book: PropTypes.object.isRequired,
-  bookShelfHandler: PropTypes.func.isRequired,
+  handleShelfChange: PropTypes.func.isRequired,
 };
 
 export default Book;

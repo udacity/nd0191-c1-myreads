@@ -24,28 +24,30 @@ function App() {
     };
   }, []);
 
-  const addBookToLibrary = (book, shelf) => {
+  const handleShelfChange = (book, shelf) => {
     if (!currentBooks.map((currBook) => currBook.id).includes(book.id)) {
-      console.log("book not in lib");
-      book.shelf = shelf;
-      BooksAPI.update(book, shelf);
-      setCurrentBooks([...currentBooks, book]);
+      addBookToLibrary(book, shelf);
+    } else {
+      changeBookShelf(book, shelf);
     }
+  };
+
+  const addBookToLibrary = (book, shelf) => {
+    book.shelf = shelf;
+    BooksAPI.update(book, shelf);
+    setCurrentBooks([...currentBooks, book]);
   };
 
   const changeBookShelf = (book, shelf) => {
     const updatedBookList = currentBooks.map((currBook) => {
       if (currBook.id === book.id) {
         currBook.shelf = shelf;
-        console.log("current books - updated: ", currentBooks);
       }
       return currBook;
     });
-
     setCurrentBooks(updatedBookList);
     BooksAPI.update(book, shelf);
   };
-  console.log("current books: ", currentBooks);
 
   return (
     <div className="app">
@@ -56,13 +58,18 @@ function App() {
           element={
             <BookLibrary
               currentBooks={currentBooks}
-              changeBookShelf={changeBookShelf}
+              handleShelfChange={handleShelfChange}
             />
           }
         />
         <Route
           path="/search"
-          element={<SearchBooks addBookToLibrary={addBookToLibrary} />}
+          element={
+            <SearchBooks
+              currentBooks={currentBooks}
+              handleShelfChange={handleShelfChange}
+            />
+          }
         />
       </Routes>
     </div>

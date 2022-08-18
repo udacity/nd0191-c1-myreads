@@ -8,17 +8,14 @@ const shelfOptions = [
   { value: "none", label: "None" },
 ];
 
-const BookShelfChanger = ({ book, bookShelfHandler }) => {
-  const [shelf, setShelf] = useState(book.shelf);
+const BookShelfChanger = ({ book, handleShelfChange }) => {
+  const [shelf, setShelf] = useState(book.shelf ? book.shelf : "none");
 
   const handleChange = (e) => {
-    console.log("shelf", e.target.value);
-    console.log("b shelf", book.shelf);
     setShelf(e.target.value);
-    bookShelfHandler(book, e.target.value);
+    handleShelfChange(book, e.target.value);
   };
 
-  console.log("shelf o", shelf);
   return (
     <div className="book-shelf-changer">
       <select value={shelf} onChange={(e) => handleChange(e)}>
@@ -47,7 +44,7 @@ const BookShelfChanger = ({ book, bookShelfHandler }) => {
 
 BookShelfChanger.propTypes = {
   book: PropTypes.object.isRequired,
-  bookShelfHandler: PropTypes.func.isRequired,
+  handleShelfChange: PropTypes.func.isRequired,
 };
 
 export default BookShelfChanger;

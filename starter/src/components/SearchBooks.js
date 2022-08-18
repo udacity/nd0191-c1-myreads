@@ -6,9 +6,9 @@ import * as BooksAPI from "../BooksAPI.js";
 
 import Book from "./Book.js";
 
-const MAX_BOOKS = 50;
+const MAX_BOOKS = 30;
 
-const SearchBooks = ({ addBookToLibrary }) => {
+const SearchBooks = ({ currentBooks, handleShelfChange }) => {
   const [searchBooks, setSearchBooks] = useState([]);
   const [query, setQuery] = useState("");
 
@@ -18,13 +18,23 @@ const SearchBooks = ({ addBookToLibrary }) => {
   };
 
   const searchBook = async () => {
+    if (!query) {
+      setSearchBooks([]);
+    }
+
     if (query.trim()) {
       const res = await BooksAPI.search(query.trim(), MAX_BOOKS);
-      if (res) {
-        setSearchBooks(res);
+      if (res && !res.error) {
+        const joinedBooks = res.map((book) => {
+          currentBooks.map((currBook) => {
+            if (book.id === currBook.id) {
+              book = currBook;
+            }
+          });
+          return book;
+        });
+        setSearchBooks(joinedBooks);
       }
-    } else {
-      setSearchBooks([]);
     }
   };
 
@@ -55,7 +65,7 @@ const SearchBooks = ({ addBookToLibrary }) => {
             searchBooks.map((book) => {
               return (
                 <li key={book.id}>
-                  <Book book={book} bookShelfHandler={addBookToLibrary} />
+                  <Book book={book} handleShelfChange={handleShelfChange} />
                 </li>
               );
             })
@@ -69,7 +79,8 @@ const SearchBooks = ({ addBookToLibrary }) => {
 };
 
 SearchBooks.propTypes = {
-  addBookToLibrary: PropTypes.func.isRequired,
+  currentBooks: PropTypes.array.isRequired,
+  handleShelfChange: PropTypes.func.isRequired,
 };
 
 export default SearchBooks;
