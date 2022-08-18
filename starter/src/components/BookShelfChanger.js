@@ -16,27 +16,22 @@ const BookShelfChanger = ({ book, handleShelfChange }) => {
   const handleChange = (e) => {
     setShelf(e.target.value);
     handleShelfChange(book, e.target.value);
+    getCurrentBookLocation();
+  };
+
+  const getCurrentBookLocation = () => {
+    const location =
+      book.shelf === undefined || book.shelf === "none" ? "search" : "library";
+    setBookLocation(location);
+    location === "search"
+      ? setShelfOptions(shelfItemsInfo.slice(0, 3))
+      : setShelfOptions(shelfItemsInfo);
   };
 
   useEffect(() => {
-    let mounted = true;
-
-    const getCurrentBookLocation = () => {
-      const location = book.shelf === undefined ? "search" : "library";
-      if (mounted) {
-        setBookLocation(location);
-        location === "search"
-          ? setShelfOptions(shelfItemsInfo.slice(0, 3))
-          : setShelfOptions(shelfItemsInfo);
-      }
-    };
     getCurrentBookLocation();
-    return () => {
-      mounted = false;
-    };
   }, []);
 
-  console.log("book loc", bookLocation);
   return (
     <div className="book-shelf-changer">
       <select value={shelf} onChange={(e) => handleChange(e)}>
