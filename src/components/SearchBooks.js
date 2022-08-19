@@ -6,7 +6,7 @@ import * as BooksAPI from "../BooksAPI.js";
 
 import Book from "./Book.js";
 
-const MAX_BOOKS = 30;
+const MAX_QUERY = 30;
 
 const SearchBooks = ({ currentBooks, handleShelfChange }) => {
   const [searchBooks, setSearchBooks] = useState([]);
@@ -23,7 +23,7 @@ const SearchBooks = ({ currentBooks, handleShelfChange }) => {
     }
 
     if (query.trim()) {
-      const res = await BooksAPI.search(query.trim(), MAX_BOOKS);
+      const res = await BooksAPI.search(query.trim(), MAX_QUERY);
       if (res && !res.error) {
         const joinedBooks = res.map((book) => {
           currentBooks.map((currBook) => {

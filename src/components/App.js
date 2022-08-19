@@ -26,8 +26,6 @@ function App() {
   }, []);
 
   const handleShelfChange = (book, shelf) => {
-    console.log("book shelf", book.shelf);
-
     if (!currentBooks.map((currBook) => currBook.id).includes(book.id)) {
       addBookToLibrary(book, shelf);
     } else {
@@ -36,15 +34,12 @@ function App() {
   };
 
   const addBookToLibrary = (book, shelf) => {
-    console.log("ADD book - shelf:", shelf);
     book.shelf = shelf;
     BooksAPI.update(book, shelf);
     setCurrentBooks([...currentBooks, book]);
   };
 
   const changeBookShelf = (book, shelf) => {
-    console.log("CHANGE book- shelf", shelf);
-
     const updatedBookList = currentBooks.map((currBook) => {
       if (currBook.id === book.id) {
         currBook.shelf = shelf;
@@ -52,7 +47,6 @@ function App() {
       return currBook;
     });
     BooksAPI.update(book, shelf);
-    // updatedBookList.filter((i) => i.shelf === "none");
     setCurrentBooks(updatedBookList);
   };
 
