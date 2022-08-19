@@ -26,7 +26,7 @@ const SearchBooks = ({ currentBooks, handleShelfChange }) => {
       const res = await BooksAPI.search(query.trim(), MAX_QUERY);
       if (res && !res.error) {
         const joinedBooks = res.map((book) => {
-          currentBooks.map((currBook) => {
+          currentBooks.forEach((currBook) => {
             if (book.id === currBook.id) {
               book = currBook;
             }
