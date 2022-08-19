@@ -5,6 +5,7 @@ import "../css/App.css";
 import * as BooksAPI from "../BooksAPI.js";
 import BookLibrary from "./BookLibrary.js";
 import SearchBooks from "./SearchBooks.js";
+import BookDetail from "./BookDetail.js";
 
 function App() {
   const [currentBooks, setCurrentBooks] = useState([]);
@@ -51,27 +52,33 @@ function App() {
 
   return (
     <div className="app">
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <BookLibrary
-              currentBooks={currentBooks}
-              handleShelfChange={handleShelfChange}
-            />
-          }
-        />
-        <Route
-          path="/search"
-          element={
-            <SearchBooks
-              currentBooks={currentBooks}
-              handleShelfChange={handleShelfChange}
-            />
-          }
-        />
-      </Routes>
+      {currentBooks.length === 0 ? (
+        <p>Loading...</p>
+      ) : (
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <BookLibrary
+                currentBooks={currentBooks}
+                handleShelfChange={handleShelfChange}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/search"
+            element={
+              <SearchBooks
+                currentBooks={currentBooks}
+                handleShelfChange={handleShelfChange}
+              />
+            }
+          />
+          <Route path="/book" element={<BookDetail />} />
+        </Routes>
+      )}
     </div>
   );
 }

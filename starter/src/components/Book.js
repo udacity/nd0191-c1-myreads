@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import BookShelfChanger from "./BookShelfChanger.js";
+import BookDetail from "./BookDetail.js";
 
 const Book = ({ book, handleShelfChange }) => {
   const [imgDims, setImgSize] = useState([]);
+  const [detailModalOpen, setDetailModalOpen] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -25,6 +27,10 @@ const Book = ({ book, handleShelfChange }) => {
       mounted = false;
     };
   }, []);
+
+  const onClickDetails = () => {
+    setDetailModalOpen(true);
+  };
 
   return (
     <div className="book">
@@ -58,6 +64,14 @@ const Book = ({ book, handleShelfChange }) => {
           <p>[Author(s) Unavailable]</p>
         )}
       </div>
+      <button className="show-details-button" onClick={onClickDetails}>
+        Show Details
+      </button>
+      {book !== undefined && detailModalOpen ? (
+        <BookDetail book={book} setDetailModalOpen={setDetailModalOpen} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
