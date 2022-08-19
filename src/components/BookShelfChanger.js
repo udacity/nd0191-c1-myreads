@@ -34,13 +34,13 @@ const BookShelfChanger = ({ book, handleShelfChange }) => {
 
   return (
     <div className="book-shelf-changer">
-      <select value={shelf} onChange={(e) => handleChange(e)}>
+      <select value={shelf} onChange={handleChange}>
         {bookLocation === "search" ? (
-          <option value="addTo" disabled>
+          <option value="none" disabled>
             Add to...
           </option>
         ) : (
-          <option value="moveTo" disabled>
+          <option value="none" disabled>
             Move to...
           </option>
         )}
