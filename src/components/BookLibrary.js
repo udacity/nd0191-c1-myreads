@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import Bookshelf from "./Bookshelf.js";
+import BookShelf from "./BookShelf.js";
 
 const BookLibrary = ({ currentBooks, handleShelfChange }) => {
   let navigate = useNavigate();
@@ -16,19 +16,19 @@ const BookLibrary = ({ currentBooks, handleShelfChange }) => {
       </div>
       <div className="list-books-content">
         <div>
-          <Bookshelf
+          <BookShelf
             title={"Currently Reading"}
             books={currentBooks.filter(
               (book) => book.shelf === "currentlyReading"
             )}
             handleShelfChange={handleShelfChange}
           />
-          <Bookshelf
+          <BookShelf
             title={"Want to Read"}
             books={currentBooks.filter((book) => book.shelf === "wantToRead")}
             handleShelfChange={handleShelfChange}
           />
-          <Bookshelf
+          <BookShelf
             title={"Read"}
             books={currentBooks.filter((book) => book.shelf === "read")}
             handleShelfChange={handleShelfChange}
