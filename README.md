@@ -11,10 +11,21 @@ Of course, you are free to start this project from scratch if you wish! Just be 
 
 To run this project:
 
-- clone the repository with `git clone https://github.com/christellevs/udacity-react-myreads.git`
-- ensure you are in the correct directory 'udacity-react-myreads' with `cd udacity-react-myreads/`
-- install all project dependencies with `npm install`
-- start the development server with `npm start`
+1. clone the repository with:
+
+   `git clone https://github.com/christellevs/udacity-react-myreads.git`
+
+2. ensure you are in the correct directory 'udacity-react-myreads' with:
+
+   `cd udacity-react-myreads/`
+
+3. install all project dependencies with:
+
+   `npm install`
+
+4. start the development server with:
+
+   `npm start`
 
 ## What You're Getting
 
@@ -31,8 +42,8 @@ To run this project:
 └── src
     ├── index.js # You should not need to modify this file. It is used for DOM rendering only.
     ├── BooksAPI.js # A JavaScript API for the provided Udacity backend.
+    ├── App.js # This is the root of the app.
     ├── components # Where all the components reside.
-    │   ├── App.js # This is the root of the app.
     |   ├── BookLibrary.js # This holds book shelves 'Currently Reading', 'Want to Read' and 'Read'.
     |   ├── BookShelf.js # This holds books in their corresponding states.
     |   ├── Book.js # Holds title and book authors and dropdown to enable changing of shelf.
@@ -51,6 +62,7 @@ To run this project:
 ## Backend Server
 
 (Below written by Udacity)
+
 To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
 
 - [`getAll`](#getall)
