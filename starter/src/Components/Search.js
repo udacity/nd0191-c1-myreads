@@ -8,9 +8,17 @@ const Search = ({ books, updateBook }) => {
   const [inputValue, setInputValue] = useState("");
   const [resultBooks, setResultBooks] = useState([]);
 
-  const searchInputValue = (e) => {
+  const searchInputValue = (value) => {
     const search = async () => {
-      const res = await BooksAPI.search(query, 20);
+      if (value === "") {
+        setResultBooks([]);
+
+        return;
+      }
+
+      const res = await BooksAPI.search(value, 20);
+
+      console.log(res);
 
       if (res.error === "empty query") {
         setResultBooks([]);
@@ -18,32 +26,24 @@ const Search = ({ books, updateBook }) => {
         return;
       }
 
-      const filteredResults = res.filter(
-        (book) => book.imageLinks !== undefined
-      );
+      const mappedResults = res
+        .filter((book) => book.imageLinks !== undefined)
+        .map((result) => {
+          const book = books.find((book) => book.id === result.id);
 
-      const mappedResults = filteredResults.map((result) => {
-        const book = books.find((book) => book.id === result.id);
+          if (book) {
+            result.shelf = book.shelf;
+          }
 
-        if (book) {
-          result.shelf = book.shelf;
-        }
-
-        return result;
-      });
+          return result;
+        });
 
       setResultBooks(mappedResults);
     };
 
-    const query = e.target.value;
+    setInputValue(value);
 
-    setInputValue(query);
-
-    if (query === "") {
-      setResultBooks([]);
-    } else {
-      search();
-    }
+    search();
   };
 
   return (
@@ -57,7 +57,7 @@ const Search = ({ books, updateBook }) => {
             type="text"
             placeholder="Search by title, author, or ISBN"
             value={inputValue}
-            onChange={searchInputValue}
+            onChange={(event) => searchInputValue(event.target.value)}
           />
         </div>
       </div>
