@@ -2,20 +2,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../BooksAPI";
 import Book from "./Book";
+import PropTypes from "prop-types";
 
 const Search = ({ books, updateBook }) => {
   const [inputValue, setInputValue] = useState("");
   const [resultBooks, setResultBooks] = useState([]);
 
   const searchInputValue = (e) => {
-    const query = e.target.value;
-
-    setInputValue(query);
-
     const search = async () => {
-      const res = await BooksAPI.search(query, 25);
-
-      console.log(res);
+      const res = await BooksAPI.search(query, 20);
 
       if (res.error === "empty query") {
         setResultBooks([]);
@@ -23,27 +18,33 @@ const Search = ({ books, updateBook }) => {
         return;
       }
 
-      const filteredResults = res.filter((book) => {
-        console.log(book);
+      const filteredResults = res.filter(
+        (book) => book.imageLinks !== undefined
+      );
 
-        return book.authors !== undefined;
+      const mappedResults = filteredResults.map((result) => {
+        const book = books.find((book) => book.id === result.id);
+
+        if (book) {
+          result.shelf = book.shelf;
+        }
+
+        return result;
       });
 
-      setResultBooks(filteredResults);
+      setResultBooks(mappedResults);
     };
 
-    if (query !== "") {
+    const query = e.target.value;
+
+    setInputValue(query);
+
+    if (query === "") {
+      setResultBooks([]);
+    } else {
       search();
     }
   };
-
-  // const updateBook = (book, shelf) => {
-  //   const update = async () => {
-  //     await BooksAPI.update(book, shelf);
-  //   };
-
-  //   update();
-  // };
 
   return (
     <div className="search-books">
@@ -63,12 +64,17 @@ const Search = ({ books, updateBook }) => {
       <div className="search-books-results">
         <ol className="books-grid">
           {resultBooks.map((book) => (
-            <Book book={book} updateBook={updateBook} />
+            <Book key={book.id} book={book} updateBook={updateBook} />
           ))}
         </ol>
       </div>
     </div>
   );
+};
+
+Search.propTypes = {
+  books: PropTypes.array.isRequired,
+  updateBook: PropTypes.func.isRequired,
 };
 
 export default Search;

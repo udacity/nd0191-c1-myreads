@@ -1,6 +1,6 @@
-const BookShelfChanger = ({ book, updateBook }) => {
-  console.log(book.shelf);
+import PropTypes from "prop-types";
 
+const BookShelfChanger = ({ book, updateBook }) => {
   const bookShelf = book.shelf !== undefined ? book.shelf : "none";
 
   return (
@@ -19,6 +19,11 @@ const BookShelfChanger = ({ book, updateBook }) => {
       </select>
     </div>
   );
+};
+
+BookShelfChanger.propTypes = {
+  book: PropTypes.object.isRequired,
+  updateBook: PropTypes.func.isRequired,
 };
 
 export default BookShelfChanger;
