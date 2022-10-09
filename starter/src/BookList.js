@@ -10,7 +10,7 @@ const BookList = ({books, updateBook}) => {
 
   //let navigate = useNavigate();
 
-  const [books, setBooks] = useState([]);
+  //const [books, setBooks] = useState([]);
 
   const showingShelves = [...new Set(books.map(b => b.shelf))];
 

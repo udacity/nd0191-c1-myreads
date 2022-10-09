@@ -19,11 +19,11 @@ const Book = ({book, updateBook}) => {
                             }}                           
                           ></div>
                           <div className="book-shelf-changer">
-                            <select onChange={(event) => updateBook(book, event.target.value)}>
+                            <select value={book.shelf} onChange={(event) => updateBook(book, event.target.value)}>
                               <option value="none" disabled>
                                 Move to...
                               </option>
-                              <option value="currentlyReading">
+                              <option value={"currentlyReading"}>
                                 Currently Reading
                               </option>
                               <option value="wantToRead">Want to Read</option>

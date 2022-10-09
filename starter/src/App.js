@@ -26,7 +26,8 @@ console.log('update fired')
     books.find( b => b.id === book.id && ( b.shelf = selection, true ) );
     // BooksAPI.update(book);
     setBooks(books);
-    console.log(books)
+    console.log(books);
+    navigate('/');
   };
 
   return (
