@@ -4,24 +4,31 @@ import { Link } from "react-router-dom";
 import Shelf from "./Shelf";
 import * as BooksAPI from "./BooksAPI";
 
-function BookList({ books, setBooks }) {
+const BookList = ({books, updateBook}) => {
 
   //const [showSearchPage, setShowSearchpage] = useState(false);
 
   //let navigate = useNavigate();
 
-  //const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState([]);
 
   const showingShelves = [...new Set(books.map(b => b.shelf))];
+
+  console.log(showingShelves);
+
+  console.log(books);
     
   return (
+
     <div>
         <ol>
         { showingShelves.map((shelf) => 
-        (        
-                <li key={shelf} className="contact-list-item">
-                    {shelf}
-                </li>
+        ( 
+          <li key={shelf}>       
+                <Shelf key={shelf}
+                    name={shelf} books={books.filter((b) => b.shelf === shelf)} updateBook={updateBook}>
+                </Shelf>
+          </li>
         ))}
         </ol>
     </div>
