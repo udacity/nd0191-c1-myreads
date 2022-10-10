@@ -9,7 +9,6 @@ const Shelf = ({books, updateBook}) => {
   return (
 
     <div>
-      
             <div className="bookshelf">
                 <h2 className="bookshelf-title">{books[0].shelf}</h2>
                 <div className="bookshelf-books">

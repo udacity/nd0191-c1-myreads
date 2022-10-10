@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Link } from "react-router-dom";
 import "./App.css";
 import * as BooksAPI from "./BooksAPI";
 import BookList from "./BookList";
-import Link from "react";
+import Search from "./Search";
 import PropTypes from "prop-types";
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
   }
 
   const updateBook = (book, selection) => {
-console.log('update fired')
+  console.log('update fired')
 
     books.find( b => b.id === book.id && ( b.shelf = selection, true ) );
     // BooksAPI.update(book);
@@ -40,16 +40,12 @@ console.log('update fired')
           <BookList books={books} updateBook={updateBook} />
         }
       />
- {/*      <Route
+      <Route
         path="/search"
         element={
-          <CreateContact
-            onCreateContact={(contact) => {
-              createContact(contact);
-            }}
-          />
+          <Search books={books} updateBook={updateBook} />
         }
-      /> */}
+      />
     </Routes>
 
   );

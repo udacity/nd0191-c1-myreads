@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState} from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import Shelf from "./Shelf";
 import * as BooksAPI from "./BooksAPI";
+import { Link } from "react-router-dom";
 
 const BookList = ({books, updateBook}) => {
 
@@ -19,8 +19,14 @@ const BookList = ({books, updateBook}) => {
   console.log(books);
     
   return (
-
+<div>
     <div>
+    <div className="list-books">
+          <div className="list-books-title">
+            <h1>MyReads</h1>
+          </div>
+          <div className="list-books-content">
+            <div>
         <ol>
         { showingShelves.map((shelf) => 
         ( 
@@ -32,6 +38,15 @@ const BookList = ({books, updateBook}) => {
         ))}
         </ol>
     </div>
+    <div className="open-search">
+      <Link to="/search" className="add-contact">
+          Search
+      </Link>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
   );
 }
 
