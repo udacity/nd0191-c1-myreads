@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { Route, Routes, useNavigate, Link } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import * as BooksAPI from "./BooksAPI";
 import BookList from "./BookList";
 import Search from "./Search";
-import PropTypes from "prop-types";
 
 const App = () => {
   let navigate = useNavigate();
@@ -20,18 +19,17 @@ const App = () => {
     setBooks(res);
   }
 
-  const updateBook = (book, selection) => {
-  console.log('update fired')
+  const updateBook = async (book, selection) => {
+    console.log('update fired')
 
-    books.find( b => b.id === book.id && ( b.shelf = selection, true ) );
-    // BooksAPI.update(book);
-    setBooks(books);
+    books.find(b => b.id === book.id && (b.shelf = selection, true));
+    BooksAPI.update(book, selection);
+    getBooks(books);
     console.log(books);
-    navigate('/');
+   // navigate('/');
   };
 
   return (
-
     <Routes>
       <Route
         exact
@@ -47,7 +45,6 @@ const App = () => {
         }
       />
     </Routes>
-
   );
 };
 
