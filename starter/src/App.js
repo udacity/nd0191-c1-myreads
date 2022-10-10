@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import * as BooksAPI from "./BooksAPI";
 import BookList from "./BookList";
 import Search from "./Search";
 
 const App = () => {
-  let navigate = useNavigate();
 
   const [books, setBooks] = useState([]);
 
@@ -23,10 +22,10 @@ const App = () => {
     console.log('update fired')
 
     books.find(b => b.id === book.id && (b.shelf = selection, true));
-    BooksAPI.update(book, selection);
-    getBooks(books);
+    await BooksAPI.update(book, selection);
+    await getBooks(books);
     console.log(books);
-   // navigate('/');
+
   };
 
   return (
@@ -41,7 +40,7 @@ const App = () => {
       <Route
         path="/search"
         element={
-          <Search books={books} updateBook={updateBook} />
+          <Search updateBook={updateBook} />
         }
       />
     </Routes>

@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 
 const Book = ({ book, updateBook }) => {
 
+  console.log("Thumbnail: " + (!book.imageLinks ? "" : book.imageLinks.thumbnail));
+
   return (
     <div>
       <div>
@@ -13,7 +15,7 @@ const Book = ({ book, updateBook }) => {
                 width: 128,
                 height: 188,
                 backgroundImage:
-                  `url(${book.imageLinks.thumbnail})`,
+                  `url(${!book.imageLinks ? "https://upload.wikimedia.org/wikipedia/commons/1/1d/No_image.JPG" : book.imageLinks.thumbnail})`,
               }}
             ></div>
             <div className="book-shelf-changer">

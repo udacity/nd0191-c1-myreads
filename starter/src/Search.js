@@ -1,35 +1,38 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState} from "react";
 import { Link } from "react-router-dom";
 import Book from "./Book";
+import * as BooksAPI from "./BooksAPI";
 
-const Search = ({ books, updateBook }) => {
-  let navigate = useNavigate();
+const Search = ({ updateBook }) => {
 
   const [query, setQuery] = useState("");
+  const [searchedBooks, setSearchedBooks] = useState([]);
 
   const updateQuery = (query) => {
-    setQuery(query.trim());
+    const retrieveSearchResults = async () => {
+      setQuery(query.trim());
+      if (query.length !== 0) {
+        console.log("query: " + query)
+        const res = await BooksAPI.search(query);
+        console.log(res);
+        setSearchedBooks(res);
+      }
+      else {
+        setSearchedBooks([]);
+      }
+    };
+
+    retrieveSearchResults();
   };
 
   const clearQuery = () => {
     updateQuery("");
   };
 
-  const showingBooks =
-    query === ""
-      ? books
-      : books.filter((b) =>
-        b.title.toLowerCase().includes(query.toLowerCase())
-      );
-
   return (
     <div className="search-books">
       <div className="search-books-bar">
-        <Link
-          className="close-search"
-          onClick={navigate("/")}
-        >
+        <Link to="/" className="close-search" >
           Close
         </Link>
         <div className="search-books-input-wrapper">
@@ -45,17 +48,14 @@ const Search = ({ books, updateBook }) => {
       <div className="search-books-results">
         <ol className="books-grid"></ol>
         <ol className="books-grid">
-          {showingBooks.map((book) => (
+          {searchedBooks.map((book) => (
             <li key={book.title}>
               <Book book={book} updateBook={updateBook}></Book>
             </li>
           ))};
         </ol>
         <div className="showing-books">
-          <span>
-            Now showing {showingBooks.length} of {books.length}
-          </span>
-          <button onClick={clearQuery}>Show all</button>
+          <button onClick={clearQuery}>Clear</button>
         </div>
       </div>
     </div>

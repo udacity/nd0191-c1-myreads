@@ -18,13 +18,28 @@ const BookList = ({ books, updateBook }) => {
             <h1>MyReads</h1>
           </div>
           <div className="list-books-content">
-            <div>
+{/*             <div>
               {showingShelves.map((shelf) =>
               (
                 <Shelf key={shelf}
                   name={shelf} books={books.filter((b) => b.shelf === shelf)} updateBook={updateBook}>
                 </Shelf>
               ))};
+            </div> */}
+            <div>
+                <Shelf key="1"
+                  name="currentlyReading" shelfName="Currently Reading" books={books.filter((b) => b.shelf === "currentlyReading")} updateBook={updateBook}>
+                </Shelf>
+            </div>
+            <div>
+                <Shelf key="2"
+                  name="WantToRead" shelfName="Want to Read" books={books.filter((b) => b.shelf === "wantToRead")} updateBook={updateBook}>
+                </Shelf>
+            </div>
+            <div>
+                <Shelf key="3"
+                  name="read" shelfName="Read" books={books.filter((b) => b.shelf === "read")} updateBook={updateBook}>
+                </Shelf>
             </div>
             <div className="open-search">
               <Link to="/search" className="add-contact">
