@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-
+import BookShelfChanger from "./BookShelfChanger";
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
 
@@ -19,18 +19,31 @@ function App() {
               <input
                 type="text"
                 placeholder="Search by title, author, or ISBN"
+                onChange={(event) => updateQuery(event.target.value)}
+
               />
             </div>
           </div>
           <div className="search-books-results">
-            <ol className="books-grid"></ol>
+            <ol className="books-grid">
+              {searchedBooks &&
+              searchedBooks.length > 0 &&
+              searchedBooks.map((book) =>
+              (
+              <Book
+              Key={book.id}
+              onUpdateShelf ={Props.onUpdateShelf}
+              bookItem={book}
+              />
+              ))}
+
+            </ol>
           </div>
         </div>
-      ) : (
+    ) : (
         <div className="list-books">
-          <div className="list-books-title">
-            <h1>MyReads</h1>
-          </div>
+          <Title/>
+        
           <div className="list-books-content">
             <div>
               <div className="bookshelf">
