@@ -17,8 +17,8 @@ return <div className='book-shelf-changer'>
     <option value='none'>None (Remove)</option>  
     
  </select>
-   </div>
-       
+
+     </div>
     }
 
     export default BookShelfChanger

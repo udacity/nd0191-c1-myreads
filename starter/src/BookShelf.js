@@ -1,8 +1,11 @@
 import React from 'react';
 import { PropTypes } from "prop-types";
+import Book from './Book';
+
+
 
 const BookShelf = (props) => {
-    BookShelf.propTypes = {
+    BookShelf.PropTypes = {
         title: PropTypes.string.isRequired,
         books: PropTypes.array.isRequired,
         updateShelf: PropTypes.func.isRequired
