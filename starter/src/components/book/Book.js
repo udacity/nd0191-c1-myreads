@@ -1,8 +1,20 @@
-const Book = ({ book }) => {
-    console.log("book",book);
+import { useState, useEffect } from "react"
+
+const Book = ({ book, currentlyReadingList, setCurrentlyReadingList }) => {
+    
   const title = book.title;
   const url = book.imageLinks.thumbnail;
   const authors = book.authors?.join(", ");
+
+  const [chooseShelf, setChooseSelf] = useState("none")
+
+  const setInShelf = (e)=> {
+    console.log("e",e.target.value);
+    setChooseSelf(e.target.value)
+    currentlyReadingList.push(book)
+    console.log(currentlyReadingList);
+  }
+
   return (
     <li>
       <div className="book">
@@ -16,7 +28,8 @@ const Book = ({ book }) => {
             }}
           ></div>
           <div className="book-shelf-changer">
-            <select>
+            <select  onChange={setInShelf}
+            value={chooseShelf}>
               <option value="none" disabled>
                 Move to...
               </option>

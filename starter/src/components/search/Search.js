@@ -1,8 +1,8 @@
 import { search } from "../../BooksAPI";
 import { useState, useEffect } from "react";
-import Book from "../book/Book";
+import Book from "../book/Book.js";
 
-const Search = ({ showSearchPage, setShowSearchpage }) => {
+const Search = ({ showSearchPage, setShowSearchpage, currentlyReadingList, setCurrentlyReadingList }) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState(null);
 
@@ -11,7 +11,7 @@ const Search = ({ showSearchPage, setShowSearchpage }) => {
   };
 
   useEffect(() => {
-    console.log("searchInput", searchInput);
+    
     if (searchInput) {
       search(searchInput, 20).then((data) => setSearchResults(data));
     }
@@ -42,8 +42,8 @@ const Search = ({ showSearchPage, setShowSearchpage }) => {
           <ol className="books-grid">
             {/* {searchResults.map(book => <Book book={book} key={book.id}/>)} */}
             {searchResults.map((book) => {
-              console.log(searchResults);
-              return <Book book={book} key={book.id} />;
+              
+              return <Book book={book} key={book.id} currentlyReadingList={currentlyReadingList} setCurrentlyReadingList={setCurrentlyReadingList} />;
             })}
           </ol>
         </div>
