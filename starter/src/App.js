@@ -5,12 +5,17 @@ import BookShelf from "./components/book-shelf/BookShelf";
 
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
-  const [currentlyReadingList, setCurrentlyReadingList] = useState([])
+  const [currentlyReadingList, setCurrentlyReadingList] = useState([]);
 
   return (
     <div className="app">
       {showSearchPage ? (
-       <Search showSearchPage={showSearchPage} setShowSearchpage={setShowSearchpage} currentlyReadingList={currentlyReadingList} setCurrentlyReadingList={setCurrentlyReadingList} />
+        <Search
+          showSearchPage={showSearchPage}
+          setShowSearchpage={setShowSearchpage}
+          currentlyReadingList={currentlyReadingList}
+          setCurrentlyReadingList={setCurrentlyReadingList}
+        />
       ) : (
         <div className="list-books">
           <div className="list-books-title">
@@ -18,7 +23,11 @@ function App() {
           </div>
           <div className="list-books-content">
             <div>
-            <BookShelf bookshelfTitle={"Currently Reading"}/>
+              <BookShelf
+                bookshelfTitle={"Currently Reading"}
+                readingList={currentlyReadingList}
+                setCurrentlyReadingList={setCurrentlyReadingList}
+              />
               <div className="bookshelf">
                 <h2 className="bookshelf-title">Want to Read</h2>
                 <div className="bookshelf-books">
@@ -199,6 +208,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
