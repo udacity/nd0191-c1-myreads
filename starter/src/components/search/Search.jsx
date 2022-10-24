@@ -1,20 +1,24 @@
 import { search } from "../../BooksAPI";
 import { useState, useEffect } from "react";
+import Book from "../book/Book";
 
 const Search = ({ showSearchPage, setShowSearchpage }) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState(null);
 
   const searchBooks = (input) => {
-   
     setSearchInput(input);
-    
   };
 
-  useEffect(()=>{
-    search(searchInput,20).then(data => setSearchResults(data))
-    console.log("searchResults",searchResults);
-  },[searchInput])
+  useEffect(() => {
+    console.log("searchInput", searchInput);
+    if (searchInput) {
+      search(searchInput, 20).then((data) => setSearchResults(data));
+    }
+    else{
+        setSearchResults([])
+    }
+  }, [searchInput]);
 
   return (
     <div className="search-books">
@@ -33,9 +37,17 @@ const Search = ({ showSearchPage, setShowSearchpage }) => {
           />
         </div>
       </div>
-      <div className="search-books-results">
-        <ol className="books-grid"></ol>
-      </div>
+      {searchResults && (
+        <div className="search-books-results">
+          <ol className="books-grid">
+            {/* {searchResults.map(book => <Book book={book} key={book.id}/>)} */}
+            {searchResults.map((book) => {
+              console.log(searchResults);
+              return <Book book={book} key={book.id} />;
+            })}
+          </ol>
+        </div>
+      )}
     </div>
   );
 };
