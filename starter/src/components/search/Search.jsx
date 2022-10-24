@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 const Search = ({ showSearchPage, setShowSearchpage }) => {
   const [searchInput, setSearchInput] = useState("");
+  const [searchResults, setSearchResults] = useState(null);
 
   const searchBooks = (input) => {
    
@@ -11,7 +12,8 @@ const Search = ({ showSearchPage, setShowSearchpage }) => {
   };
 
   useEffect(()=>{
-    console.log("was changed", searchInput)
+    search(searchInput,20).then(data => setSearchResults(data))
+    console.log("searchResults",searchResults);
   },[searchInput])
 
   return (
