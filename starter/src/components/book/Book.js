@@ -1,19 +1,47 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
-const Book = ({ book, currentlyReadingList, setCurrentlyReadingList }) => {
-    
+const Book = ({ book, readingLists, setreadingLists }) => {
   const title = book.title;
   const url = book.imageLinks.thumbnail;
   const authors = book.authors?.join(", ");
+  readingLists = JSON.parse(localStorage.getItem("readingLists"));
 
-  const [chooseShelf, setChooseSelf] = useState("none")
 
-  const setInShelf = (e)=> {
-    console.log("e",e.target.value);
-    setChooseSelf(e.target.value)
-    currentlyReadingList.push(book)
-    console.log(currentlyReadingList);
-  }
+  console.log(" readingLists", readingLists);
+
+  const [chooseShelf, setChooseSelf] = useState("none");
+
+  useEffect(() => {
+    console.log( " readingLists",readingLists)
+      if (
+        readingLists?.currentlyReading.find(
+          (bookInList) => bookInList.id === book.id
+        )
+      ) {
+        console.log("in the list");
+        setChooseSelf("currentlyReading");
+      } else if (
+        readingLists?.wantToRead.find((bookInList) => bookInList.id === book.id)
+      ) {
+        setChooseSelf("wantToRead");
+      } else if (
+        readingLists?.read.find((bookInList) => bookInList.id === book.id)
+      ) {
+        setChooseSelf("read");
+      }
+  }, []);
+
+  const setInShelf = (e) => {
+    console.log("e", e.target.value);
+    setChooseSelf(e.target.value);
+
+    if (e.target.value !== "none") {
+      readingLists[e.target.value].push(book);
+      setreadingLists(readingLists)
+      localStorage.setItem("readingLists", JSON.stringify(readingLists));
+    }
+    console.log(" readingLists", readingLists);
+  };
 
   return (
     <li>
@@ -24,12 +52,11 @@ const Book = ({ book, currentlyReadingList, setCurrentlyReadingList }) => {
             style={{
               width: 128,
               height: 193,
-              backgroundImage:  `url(${url})` ,
+              backgroundImage: `url(${url})`,
             }}
           ></div>
           <div className="book-shelf-changer">
-            <select  onChange={setInShelf}
-            value={chooseShelf}>
+            <select onChange={setInShelf} value={chooseShelf}>
               <option value="none" disabled>
                 Move to...
               </option>

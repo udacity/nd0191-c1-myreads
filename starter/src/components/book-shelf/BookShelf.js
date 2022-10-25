@@ -3,8 +3,8 @@ import Book from "../book/Book.js";
 const BookShelf = ({
   bookshelfTitle,
   readingList,
-  currentlyReadingList,
-  setCurrentlyReadingList,
+  readingLists,
+  setreadingLists,
 }) => {
   return (
     <div className="bookshelf">
@@ -16,8 +16,8 @@ const BookShelf = ({
               <Book
                 book={book}
                 key={book.id}
-                currentlyReadingList={currentlyReadingList}
-                setCurrentlyReadingList={setCurrentlyReadingList}
+                readingLists={readingLists}
+                setreadingLists={setreadingLists}
               />
             ))}
         </ol>
