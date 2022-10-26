@@ -4,14 +4,11 @@ const Book = ({ book, readingLists, setreadingLists }) => {
   const title = book.title;
   const url = book.imageLinks.thumbnail;
   const authors = book.authors?.join(", ");
-  readingLists = JSON.parse(localStorage.getItem("readingLists"));
-
-  console.log(" readingLists", readingLists);
+ 
 
   const [chooseShelf, setChooseSelf] = useState("none");
 
   useEffect(() => {
-    console.log(" readingLists", readingLists);
     updateChooseSelf();
   }, []);
 
@@ -34,45 +31,57 @@ const Book = ({ book, readingLists, setreadingLists }) => {
     }
   };
 
+  const pushToList = (key) => {
+    let newReadlingList = { ...readingLists };
+    newReadlingList[key].push(book);
+
+    return newReadlingList;
+  };
+
+  const deleteFromList = (key, index) => {
+    console.log("key", key);
+    let newReadlingList = { ...readingLists };
+    newReadlingList[key].splice(index, 1);
+    console.log("newReadlingList", newReadlingList);
+    return newReadlingList;
+  };
+
   const setInShelf = (e) => {
     setChooseSelf(e.target.value);
 
     if (
-      e.target.value === "currentlyReading" &&
       readingLists.currentlyReading.find((bookInList, index) => {
         if (bookInList.id === book.id) {
-          readingLists.currentlyReading.splice(index, 1);
-
+          console.log("inside if");
+          setreadingLists(deleteFromList("currentlyReading", index));
           return true;
         }
         return false;
       })
     ) {
     } else if (
-      e.target.value === "wantToRead" &&
       readingLists.wantToRead.find((bookInList, index) => {
         if (bookInList.id === book.id) {
-          readingLists.wantToRead.splice(index, 1);
+          setreadingLists(deleteFromList("wantToRead", index));
           return true;
         }
         return false;
       })
     ) {
     } else if (
-      e.target.value === "read" &&
       readingLists.read.find((bookInList, index) => {
         if (bookInList.id === book.id) {
-          readingLists.read.splice(index, 1);
+          setreadingLists(deleteFromList("read", index));
           return true;
         }
         return false;
       })
-    )
-      if (e.target.value !== "none") {
-        readingLists[e.target.value].push(book);
-        setreadingLists(readingLists);
-        localStorage.setItem("readingLists", JSON.stringify(readingLists));
-      }
+    ) {
+    }
+    if (e.target.value !== "none") {
+      console.log("here");
+      setreadingLists(pushToList(e.target.value));
+    }
     console.log(" readingLists", readingLists);
   };
 

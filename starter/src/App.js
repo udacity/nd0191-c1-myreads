@@ -5,8 +5,8 @@ import BookShelf from "./components/book-shelf/BookShelf";
 
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
-  const [readingLists, setreadingLists] = useState({currentlyReading:[], wantToRead:[], read:[]});
-  localStorage.setItem("readingLists", JSON.stringify(readingLists));
+  const initialData = { currentlyReading: [], wantToRead: [], read: [] };
+  const [readingLists, setreadingLists] = useState(initialData);
 
   return (
     <div className="app">
@@ -26,21 +26,22 @@ function App() {
             <div>
               <BookShelf
                 bookshelfTitle={"Currently Reading"}
-                readingList={readingLists.currentlyReading}
+                bookShelfKey={"currentlyReading"}
+                readingLists={readingLists}
                 setreadingLists={setreadingLists}
               />
-               <BookShelf
+              <BookShelf
                 bookshelfTitle={"Want to Read"}
-                readingList={readingLists.wantToRead}
+                bookShelfKey={"wantToRead"}
+                readingLists={readingLists}
                 setreadingLists={setreadingLists}
-              />
-               <BookShelf
+                />
+              <BookShelf
                 bookshelfTitle={"Read"}
-                readingList={readingLists.read}
+                bookShelfKey={"read"}
+                readingLists={readingLists}
                 setreadingLists={setreadingLists}
               />
-              
-             
             </div>
           </div>
           <div className="open-search">
