@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 
 const Book = ({ book, readingLists, setreadingLists }) => {
   const title = book.title;
-  const url = book.imageLinks.thumbnail;
+  const url = book.imageLinks?.thumbnail;
   const authors = book.authors?.join(", ");
- 
 
   const [chooseShelf, setChooseSelf] = useState("none");
 
@@ -18,7 +17,6 @@ const Book = ({ book, readingLists, setreadingLists }) => {
         (bookInList) => bookInList.id === book.id
       )
     ) {
-      console.log("in the list");
       setChooseSelf("currentlyReading");
     } else if (
       readingLists.wantToRead.find((bookInList) => bookInList.id === book.id)

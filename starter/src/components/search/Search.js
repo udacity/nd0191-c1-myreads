@@ -19,9 +19,11 @@ const Search = ({
     if (searchInput) {
       console.log("changed");
       console.log("searchInput", searchInput);
-      search(searchInput, 20).then((data) => setSearchResults(data)).catch(err =>  {
-        
-        setSearchResults([])});
+      search(searchInput, 20)
+        .then((data) => setSearchResults(data))
+        .catch((err) => {
+          setSearchResults([]);
+        });
     } else {
       setSearchResults([]);
     }
@@ -44,11 +46,13 @@ const Search = ({
           />
         </div>
       </div>
-      {searchResults && (
+       {
+        
         <div className="search-books-results">
           <ol className="books-grid">
             {/* {searchResults.map(book => <Book book={book} key={book.id}/>)} */}
-            {searchResults.map((book) => {
+           
+            {searchResults.length && searchResults.map((book) => {
               return (
                 <Book
                   book={book}
@@ -60,7 +64,7 @@ const Search = ({
             })}
           </ol>
         </div>
-      )}
+      }
     </div>
   );
 };
