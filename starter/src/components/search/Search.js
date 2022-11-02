@@ -17,8 +17,6 @@ const Search = ({
 
   useEffect(() => {
     if (searchInput) {
-      console.log("changed");
-      console.log("searchInput", searchInput);
       search(searchInput, 20)
         .then((data) => setSearchResults(data))
         .catch((err) => {
@@ -46,22 +44,20 @@ const Search = ({
           />
         </div>
       </div>
-       {
-        
+      {
         <div className="search-books-results">
           <ol className="books-grid">
-            {/* {searchResults.map(book => <Book book={book} key={book.id}/>)} */}
-           
-            {searchResults.length && searchResults.map((book) => {
-              return (
-                <Book
-                  book={book}
-                  key={book.id}
-                  readingLists={readingLists}
-                  setreadingLists={setreadingLists}
-                />
-              );
-            })}
+            {searchResults.length &&
+              searchResults.map((book) => {
+                return (
+                  <Book
+                    book={book}
+                    key={book.id}
+                    readingLists={readingLists}
+                    setreadingLists={setreadingLists}
+                  />
+                );
+              })}
           </ol>
         </div>
       }

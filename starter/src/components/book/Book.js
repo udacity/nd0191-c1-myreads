@@ -32,15 +32,12 @@ const Book = ({ book, readingLists, setreadingLists }) => {
   const pushToList = (key) => {
     let newReadlingList = { ...readingLists };
     newReadlingList[key].push(book);
-
     return newReadlingList;
   };
 
   const deleteFromList = (key, index) => {
-    console.log("key", key);
     let newReadlingList = { ...readingLists };
     newReadlingList[key].splice(index, 1);
-    console.log("newReadlingList", newReadlingList);
     return newReadlingList;
   };
 
@@ -50,7 +47,6 @@ const Book = ({ book, readingLists, setreadingLists }) => {
     if (
       readingLists.currentlyReading.find((bookInList, index) => {
         if (bookInList.id === book.id) {
-          console.log("inside if");
           setreadingLists(deleteFromList("currentlyReading", index));
           return true;
         }
@@ -77,10 +73,8 @@ const Book = ({ book, readingLists, setreadingLists }) => {
     ) {
     }
     if (e.target.value !== "none") {
-      console.log("here");
       setreadingLists(pushToList(e.target.value));
     }
-    console.log(" readingLists", readingLists);
   };
 
   return (
@@ -103,7 +97,7 @@ const Book = ({ book, readingLists, setreadingLists }) => {
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
               <option value="read">Read</option>
-              <option value="none">None</option>
+              <option value="none">Remove from MyReads</option>
             </select>
           </div>
         </div>
