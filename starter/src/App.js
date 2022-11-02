@@ -9,23 +9,14 @@ function App() {
   const initialData = { currentlyReading: [], wantToRead: [], read: [] };
   const [readingLists, setReadingLists] = useState(initialData);
 
-  // useEffect(() => {
-  //   getAll().then((books) => {
-  //     let newReadlingLists = { currentlyReading: [], wantToRead: [], read: [] };
-      
-  //     books.map((book) => newReadlingLists[book.shelf].push(book));
-  //     setReadingLists(newReadlingLists);
-  //   });
-  // },[]);
-
   useEffect(() => {
     getAll().then((books) => {
       let newReadlingLists = { currentlyReading: [], wantToRead: [], read: [] };
-      
+
       books.map((book) => newReadlingLists[book.shelf].push(book));
       setReadingLists(newReadlingLists);
     });
-  },[]);
+  }, []);
 
   return (
     <div className="app">
