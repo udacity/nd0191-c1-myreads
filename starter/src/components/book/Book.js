@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Book = ({ book, readingLists, setreadingLists }) => {
+const Book = ({ book, readingLists, setReadingLists }) => {
   const title = book.title;
   const url = book.imageLinks?.thumbnail;
   const authors = book.authors?.join(", ");
@@ -9,7 +9,7 @@ const Book = ({ book, readingLists, setreadingLists }) => {
 
   useEffect(() => {
     updateChooseSelf();
-  }, []);
+  });
 
   const updateChooseSelf = () => {
     if (
@@ -30,6 +30,7 @@ const Book = ({ book, readingLists, setreadingLists }) => {
   };
 
   const pushToList = (key) => {
+    console.log("book",book);
     let newReadlingList = { ...readingLists };
     newReadlingList[key].push(book);
     return newReadlingList;
@@ -47,7 +48,7 @@ const Book = ({ book, readingLists, setreadingLists }) => {
     if (
       readingLists.currentlyReading.find((bookInList, index) => {
         if (bookInList.id === book.id) {
-          setreadingLists(deleteFromList("currentlyReading", index));
+          setReadingLists(deleteFromList("currentlyReading", index));
           return true;
         }
         return false;
@@ -56,7 +57,7 @@ const Book = ({ book, readingLists, setreadingLists }) => {
     } else if (
       readingLists.wantToRead.find((bookInList, index) => {
         if (bookInList.id === book.id) {
-          setreadingLists(deleteFromList("wantToRead", index));
+          setReadingLists(deleteFromList("wantToRead", index));
           return true;
         }
         return false;
@@ -65,7 +66,7 @@ const Book = ({ book, readingLists, setreadingLists }) => {
     } else if (
       readingLists.read.find((bookInList, index) => {
         if (bookInList.id === book.id) {
-          setreadingLists(deleteFromList("read", index));
+          setReadingLists(deleteFromList("read", index));
           return true;
         }
         return false;
@@ -73,7 +74,7 @@ const Book = ({ book, readingLists, setreadingLists }) => {
     ) {
     }
     if (e.target.value !== "none") {
-      setreadingLists(pushToList(e.target.value));
+      setReadingLists(pushToList(e.target.value));
     }
   };
 

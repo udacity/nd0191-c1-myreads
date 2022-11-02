@@ -6,7 +6,7 @@ const Search = ({
   showSearchPage,
   setShowSearchpage,
   readingLists,
-  setreadingLists,
+  setReadingLists,
 }) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -14,6 +14,12 @@ const Search = ({
   // const searchBooks = (input) => {
   //   setSearchInput(input);
   // };
+
+  // useEffect(() => {
+  //   getAll().then((books) => {
+  //     setSearchResults(books);
+  //   });
+  // });
 
   useEffect(() => {
     if (searchInput) {
@@ -31,8 +37,11 @@ const Search = ({
     <div className="search-books">
       <div className="search-books-bar">
         <a
+          href="/"
           className="close-search"
-          onClick={() => setShowSearchpage(!showSearchPage)}
+          onClick={(e) => {
+            e.preventDefault()
+            setShowSearchpage(!showSearchPage)}}
         >
           Close
         </a>
@@ -54,7 +63,7 @@ const Search = ({
                     book={book}
                     key={book.id}
                     readingLists={readingLists}
-                    setreadingLists={setreadingLists}
+                    setReadingLists={setReadingLists}
                   />
                 );
               })}

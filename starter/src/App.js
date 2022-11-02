@@ -1,12 +1,31 @@
 import "./App.css";
-import { useState } from "react";
+import { getAll } from "./BooksAPI";
+import { useState, useEffect } from "react";
 import Search from "./components/search/Search.js";
 import BookShelf from "./components/book-shelf/BookShelf";
 
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
   const initialData = { currentlyReading: [], wantToRead: [], read: [] };
-  const [readingLists, setreadingLists] = useState(initialData);
+  const [readingLists, setReadingLists] = useState(initialData);
+
+  // useEffect(() => {
+  //   getAll().then((books) => {
+  //     let newReadlingLists = { currentlyReading: [], wantToRead: [], read: [] };
+      
+  //     books.map((book) => newReadlingLists[book.shelf].push(book));
+  //     setReadingLists(newReadlingLists);
+  //   });
+  // },[]);
+
+  useEffect(() => {
+    getAll().then((books) => {
+      let newReadlingLists = { currentlyReading: [], wantToRead: [], read: [] };
+      
+      books.map((book) => newReadlingLists[book.shelf].push(book));
+      setReadingLists(newReadlingLists);
+    });
+  },[]);
 
   return (
     <div className="app">
@@ -15,7 +34,7 @@ function App() {
           showSearchPage={showSearchPage}
           setShowSearchpage={setShowSearchpage}
           readingLists={readingLists}
-          setreadingLists={setreadingLists}
+          setReadingLists={setReadingLists}
         />
       ) : (
         <div className="list-books">
@@ -28,24 +47,32 @@ function App() {
                 bookshelfTitle={"Currently Reading"}
                 bookShelfKey={"currentlyReading"}
                 readingLists={readingLists}
-                setreadingLists={setreadingLists}
+                setReadingLists={setReadingLists}
               />
               <BookShelf
                 bookshelfTitle={"Want to Read"}
                 bookShelfKey={"wantToRead"}
                 readingLists={readingLists}
-                setreadingLists={setreadingLists}
-                />
+                setReadingLists={setReadingLists}
+              />
               <BookShelf
                 bookshelfTitle={"Read"}
                 bookShelfKey={"read"}
                 readingLists={readingLists}
-                setreadingLists={setreadingLists}
+                setReadingLists={setReadingLists}
               />
             </div>
           </div>
           <div className="open-search">
-            <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowSearchpage(!showSearchPage);
+              }}
+            >
+              Add a book
+            </a>
           </div>
         </div>
       )}
