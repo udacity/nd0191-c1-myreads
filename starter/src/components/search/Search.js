@@ -11,16 +11,6 @@ const Search = ({
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  // const searchBooks = (input) => {
-  //   setSearchInput(input);
-  // };
-
-  // useEffect(() => {
-  //   getAll().then((books) => {
-  //     setSearchResults(books);
-  //   });
-  // });
-
   useEffect(() => {
     if (searchInput) {
       search(searchInput, 20)
@@ -40,8 +30,9 @@ const Search = ({
           href="/"
           className="close-search"
           onClick={(e) => {
-            e.preventDefault()
-            setShowSearchpage(!showSearchPage)}}
+            e.preventDefault();
+            setShowSearchpage(!showSearchPage);
+          }}
         >
           Close
         </a>
@@ -58,7 +49,6 @@ const Search = ({
           <ol className="books-grid">
             {searchResults.length &&
               searchResults.map((book) => {
-                book.shelf = undefined;
                 return (
                   <Book
                     book={book}

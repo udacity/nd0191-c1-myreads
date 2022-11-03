@@ -12,7 +12,6 @@ function App() {
   useEffect(() => {
     getAll().then((books) => {
       let newReadlingLists = { currentlyReading: [], wantToRead: [], read: [] };
-
       books.map((book) => newReadlingLists[book.shelf].push(book));
       setReadingLists(newReadlingLists);
     });

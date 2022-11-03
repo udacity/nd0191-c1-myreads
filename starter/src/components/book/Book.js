@@ -5,7 +5,6 @@ const Book = ({ book, readingLists, setReadingLists }) => {
   const title = book.title;
   const url = book.imageLinks?.thumbnail;
   const authors = book.authors?.join(", ");
-
   const [chooseShelf, setChooseSelf] = useState("none");
 
   useEffect(() => {
@@ -31,13 +30,11 @@ const Book = ({ book, readingLists, setReadingLists }) => {
   };
 
   const pushToList = (key) => {
-    console.log("book", book);
     let newReadlingList = { ...readingLists };
     if (key !== "none") {
       newReadlingList[key].push(book);
     }
     update(book, key);
-
     return newReadlingList;
   };
 
@@ -78,9 +75,7 @@ const Book = ({ book, readingLists, setReadingLists }) => {
       })
     ) {
     }
-    // if (e.target.value !== "none") {
     setReadingLists(pushToList(e.target.value));
-    // }
   };
 
   return (
