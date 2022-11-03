@@ -58,6 +58,7 @@ const Search = ({
           <ol className="books-grid">
             {searchResults.length &&
               searchResults.map((book) => {
+                book.shelf = undefined;
                 return (
                   <Book
                     book={book}

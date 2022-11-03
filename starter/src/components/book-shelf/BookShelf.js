@@ -3,7 +3,7 @@ import Book from "../book/Book.js";
 const BookShelf = ({
   bookshelfTitle,
   readingLists,
-  setreadingLists,
+  setReadingLists,
   bookShelfKey,
 }) => {
   return (
@@ -16,7 +16,7 @@ const BookShelf = ({
               book={book}
               key={book.id}
               readingLists={readingLists}
-              setreadingLists={setreadingLists}
+              setReadingLists={setReadingLists}
             />
           ))}
         </ol>

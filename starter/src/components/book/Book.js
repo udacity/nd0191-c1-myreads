@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { update } from "../../BooksAPI";
 
 const Book = ({ book, readingLists, setReadingLists }) => {
   const title = book.title;
@@ -30,9 +31,13 @@ const Book = ({ book, readingLists, setReadingLists }) => {
   };
 
   const pushToList = (key) => {
-    console.log("book",book);
+    console.log("book", book);
     let newReadlingList = { ...readingLists };
-    newReadlingList[key].push(book);
+    if (key !== "none") {
+      newReadlingList[key].push(book);
+    }
+    update(book, key);
+
     return newReadlingList;
   };
 
@@ -73,9 +78,9 @@ const Book = ({ book, readingLists, setReadingLists }) => {
       })
     ) {
     }
-    if (e.target.value !== "none") {
-      setReadingLists(pushToList(e.target.value));
-    }
+    // if (e.target.value !== "none") {
+    setReadingLists(pushToList(e.target.value));
+    // }
   };
 
   return (
