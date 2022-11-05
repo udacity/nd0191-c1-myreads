@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import { update } from "../../BooksAPI";
+import { BooksContext } from "../../BooksContext";
+import { useContext } from "react";
 
-const Book = ({ book, readingLists, setReadingLists }) => {
+const Book = ({ book }) => {
+
+  const {readingLists, setReadingLists} = useContext(BooksContext);
+
   const title = book.title;
   const url = book.imageLinks?.thumbnail;
   const authors = book.authors?.join(", ");

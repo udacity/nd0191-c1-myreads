@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Book from "../book/Book.js";
 import { Link } from "react-router-dom";
 
-const Search = ({ readingLists, setReadingLists }) => {
+const Search = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -38,14 +38,7 @@ const Search = ({ readingLists, setReadingLists }) => {
           <ol className="books-grid">
             {searchResults.length &&
               searchResults.map((book) => {
-                return (
-                  <Book
-                    book={book}
-                    key={book.id}
-                    readingLists={readingLists}
-                    setReadingLists={setReadingLists}
-                  />
-                );
+                return <Book book={book} key={book.id} />;
               })}
           </ol>
         </div>

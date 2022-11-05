@@ -1,47 +1,25 @@
 import "./App.css";
-import { getAll } from "./BooksAPI";
-import { useState, useEffect } from "react";
+// import { useContext } from "react";
 import Search from "./components/search/Search.js";
 import Main from "./components/main/Main";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BooksProvider } from "./BooksContext";
+// import { BooksContext } from "./BooksContext";
 
 function App() {
-  const initialData = { currentlyReading: [], wantToRead: [], read: [] };
-  const [readingLists, setReadingLists] = useState(initialData);
-
-  useEffect(() => {
-    getAll().then((books) => {
-      let newReadlingLists = { currentlyReading: [], wantToRead: [], read: [] };
-      books.map((book) => newReadlingLists[book.shelf].push(book));
-      setReadingLists(newReadlingLists);
-    });
-  }, []);
+  // const {readingLists, setReadingLists} = useContext(BooksContext);
 
   return (
-    <BrowserRouter>
-      <div className="app">
-        <Routes>
-          <Route
-            path="/search"
-            element={
-              <Search
-                readingLists={readingLists}
-                setReadingLists={setReadingLists}
-              />
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <Main
-                readingLists={readingLists}
-                setReadingLists={setReadingLists}
-              />
-            }
-          />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <BooksProvider>
+      <BrowserRouter>
+        <div className="app">
+          <Routes>
+            <Route path="/search" element={<Search />} />
+            <Route path="/" element={<Main />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </BooksProvider>
   );
 }
 

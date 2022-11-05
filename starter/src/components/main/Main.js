@@ -12,20 +12,14 @@ const Main = ({ readingLists, setReadingLists }) => {
           <BookShelf
             bookshelfTitle={"Currently Reading"}
             bookShelfKey={"currentlyReading"}
-            readingLists={readingLists}
-            setReadingLists={setReadingLists}
           />
           <BookShelf
             bookshelfTitle={"Want to Read"}
             bookShelfKey={"wantToRead"}
-            readingLists={readingLists}
-            setReadingLists={setReadingLists}
           />
-          <BookShelf
-            bookshelfTitle={"Read"}
-            bookShelfKey={"read"}
-            readingLists={readingLists}
-            setReadingLists={setReadingLists}
+          <BookShelf 
+          bookshelfTitle={"Read"} 
+          bookShelfKey={"read"} 
           />
         </div>
       </div>

@@ -1,23 +1,17 @@
 import Book from "../book/Book.js";
+import { BooksContext } from "../../BooksContext";
+import { useContext } from "react";
 
-const BookShelf = ({
-  bookshelfTitle,
-  readingLists,
-  setReadingLists,
-  bookShelfKey,
-}) => {
+const BookShelf = ({ bookshelfTitle, bookShelfKey }) => {
+  const { readingLists } = useContext(BooksContext);
+
   return (
     <div className="bookshelf">
       <h2 className="bookshelf-title">{bookshelfTitle}</h2>
       <div className="bookshelf-books">
         <ol className="books-grid">
           {readingLists[bookShelfKey].map((book) => (
-            <Book
-              book={book}
-              key={book.id}
-              readingLists={readingLists}
-              setReadingLists={setReadingLists}
-            />
+            <Book book={book} key={book.id} readingLists={readingLists} />
           ))}
         </ol>
       </div>
