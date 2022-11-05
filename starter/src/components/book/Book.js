@@ -4,8 +4,7 @@ import { BooksContext } from "../../BooksContext";
 import { useContext } from "react";
 
 const Book = ({ book }) => {
-
-  const {readingLists, setReadingLists} = useContext(BooksContext);
+  const { readingLists, setReadingLists } = useContext(BooksContext);
 
   const title = book.title;
   const url = book.imageLinks?.thumbnail;
@@ -17,20 +16,16 @@ const Book = ({ book }) => {
   });
 
   const updateChooseSelf = () => {
-    if (
-      readingLists.currentlyReading.find(
-        (bookInList) => bookInList.id === book.id
-      )
-    ) {
-      setChooseSelf("currentlyReading");
-    } else if (
-      readingLists.wantToRead.find((bookInList) => bookInList.id === book.id)
-    ) {
-      setChooseSelf("wantToRead");
-    } else if (
-      readingLists.read.find((bookInList) => bookInList.id === book.id)
-    ) {
-      setChooseSelf("read");
+
+    for (const list in readingLists) {
+      console.log(list);
+      readingLists[list].find((bookInList) => {
+        if (bookInList.id === book.id) {
+          setChooseSelf(list);
+          return true;
+        }
+        return false;
+      });
     }
   };
 
@@ -40,6 +35,7 @@ const Book = ({ book }) => {
       newReadlingList[key].push(book);
     }
     update(book, key);
+    setChooseSelf(key);
     return newReadlingList;
   };
 
