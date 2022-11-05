@@ -5,6 +5,7 @@ import Search from "./components/search/Search.js";
 // import BookShelf from "./components/book-shelf/BookShelf";
 // import { Routes, Route } from "react-router-dom";
 import Main from "./components/main/Main";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
@@ -20,8 +21,11 @@ function App() {
   }, []);
 
   return (
-    // <Routes>
+    <BrowserRouter>
+     
       <div className="app">
+      {/* <Routes> */}
+      {/* <Route /> */}
         {showSearchPage ? (
           <Search
             showSearchPage={showSearchPage}
@@ -37,8 +41,9 @@ function App() {
             showSearchPage={showSearchPage}
           />
         )}
+     {/* </Routes> */}
       </div>
-    // </Routes>
+    </BrowserRouter>
   );
 }
 
