@@ -2,7 +2,9 @@ import "./App.css";
 import { getAll } from "./BooksAPI";
 import { useState, useEffect } from "react";
 import Search from "./components/search/Search.js";
-import BookShelf from "./components/book-shelf/BookShelf";
+// import BookShelf from "./components/book-shelf/BookShelf";
+// import { Routes, Route } from "react-router-dom";
+import Main from "./components/main/Main";
 
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
@@ -18,55 +20,25 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
-      {showSearchPage ? (
-        <Search
-          showSearchPage={showSearchPage}
-          setShowSearchpage={setShowSearchpage}
-          readingLists={readingLists}
-          setReadingLists={setReadingLists}
-        />
-      ) : (
-        <div className="list-books">
-          <div className="list-books-title">
-            <h1>MyReads</h1>
-          </div>
-          <div className="list-books-content">
-            <div>
-              <BookShelf
-                bookshelfTitle={"Currently Reading"}
-                bookShelfKey={"currentlyReading"}
-                readingLists={readingLists}
-                setReadingLists={setReadingLists}
-              />
-              <BookShelf
-                bookshelfTitle={"Want to Read"}
-                bookShelfKey={"wantToRead"}
-                readingLists={readingLists}
-                setReadingLists={setReadingLists}
-              />
-              <BookShelf
-                bookshelfTitle={"Read"}
-                bookShelfKey={"read"}
-                readingLists={readingLists}
-                setReadingLists={setReadingLists}
-              />
-            </div>
-          </div>
-          <div className="open-search">
-            <a
-              href="/"
-              onClick={(e) => {
-                e.preventDefault();
-                setShowSearchpage(!showSearchPage);
-              }}
-            >
-              Add a book
-            </a>
-          </div>
-        </div>
-      )}
-    </div>
+    // <Routes>
+      <div className="app">
+        {showSearchPage ? (
+          <Search
+            showSearchPage={showSearchPage}
+            setShowSearchpage={setShowSearchpage}
+            readingLists={readingLists}
+            setReadingLists={setReadingLists}
+          />
+        ) : (
+          <Main
+            readingLists={readingLists}
+            setReadingLists={setReadingLists}
+            setShowSearchpage={setShowSearchpage}
+            showSearchPage={showSearchPage}
+          />
+        )}
+      </div>
+    // </Routes>
   );
 }
 
