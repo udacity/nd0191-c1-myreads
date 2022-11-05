@@ -33,7 +33,6 @@ const Book = ({ book }) => {
       newReadlingList[key].push(book);
     }
     update(book, key);
-    setChooseSelf(key);
     return newReadlingList;
   };
 
