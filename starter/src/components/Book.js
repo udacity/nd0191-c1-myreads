@@ -1,7 +1,8 @@
 import React from "react";
 import SelectShelf from "./SelectShelf";
 
-const Book = (book) => {
+const Book = ({book}) => {
+
   return (
     <div className="book">
       <div className="book-top">
@@ -10,7 +11,7 @@ const Book = (book) => {
           style={{
             width: 128,
             height: 188,
-            backgroundImage: `url(${book.coverImgUrl})`,
+            backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
           }}
         ></div>
         <div className="book-shelf-changer">
@@ -18,7 +19,7 @@ const Book = (book) => {
         </div>
       </div>
       <div className="book-title">{book.title}</div>
-      <div className="book-authors">{book.auther}</div>
+      <div className="book-authors">{book.authors}</div>
     </div>
   );
 };
