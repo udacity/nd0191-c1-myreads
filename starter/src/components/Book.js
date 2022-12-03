@@ -1,7 +1,7 @@
 import React from "react";
 import SelectShelf from "./SelectShelf";
 
-const Book = ({book}) => {
+const Book = ({book, shelf}) => {
 
   return (
     <div className="book">
@@ -15,7 +15,7 @@ const Book = ({book}) => {
           }}
         ></div>
         <div className="book-shelf-changer">
-          <SelectShelf />
+          <SelectShelf shelf={shelf}/>
         </div>
       </div>
       <div className="book-title">{book.title}</div>

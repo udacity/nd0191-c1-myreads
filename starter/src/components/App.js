@@ -47,7 +47,24 @@ function App() {
           </div>
           <div className="list-books-content">
             <div>
-              <BookShelf books={books}/>
+              <div className="bookshelf">
+                <h2 className="bookshelf-title">Currently Reading</h2>
+                <BookShelf
+                  books={books.filter((b) => b.shelf === "currentlyReading")} shelf={"currentlyReading"}
+                />
+              </div>
+              <div className="bookshelf">
+                <h2 className="bookshelf-title">Want to read</h2>
+                <BookShelf
+                  books={books.filter((b) => b.shelf === "wantToRead")} shelf={"wantToRead"}
+                />
+              </div>
+              <div className="bookshelf">
+                <h2 className="bookshelf-title">Read</h2>
+                <BookShelf
+                  books={books.filter((b) => b.shelf === "read")} shelf={"read"}
+                />
+              </div>
             </div>
           </div>
           <div className="open-search">
