@@ -1,7 +1,7 @@
 import React from "react";
 import SelectShelf from "./SelectShelf";
 
-const Book = ({book, shelf}) => {
+const Book = ({book, shelf, onUpdateShelf}) => {
 
   return (
     <div className="book">
@@ -15,7 +15,7 @@ const Book = ({book, shelf}) => {
           }}
         ></div>
         <div className="book-shelf-changer">
-          <SelectShelf shelf={shelf}/>
+          <SelectShelf book={book} shelf={shelf} onUpdateShelf={onUpdateShelf}/>
         </div>
       </div>
       <div className="book-title">{book.title}</div>

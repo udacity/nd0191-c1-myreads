@@ -1,8 +1,9 @@
 import React from "react";
 
-const SelectShelf = () => {
+const SelectShelf = ({book, shelf,onUpdateShelf}) => {
+
   return (
-    <select>
+    <select defaultValue={shelf} onChange={(e)=>onUpdateShelf(book,e.target.value)}>
       <option value="none" disabled>
         Move to...
       </option>

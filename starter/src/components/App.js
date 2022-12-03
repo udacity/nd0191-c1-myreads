@@ -18,6 +18,16 @@ function App() {
     getBooks();
   }, []);
 
+  const updateBookShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf);
+    let newBooks = books.map((b) => {
+      if (b.id == book.id) {
+        b.shelf = shelf;
+      }
+      return b;
+    });
+    setBooks(newBooks);
+  };
   return (
     <div className="app">
       {showSearchPage ? (
@@ -50,19 +60,25 @@ function App() {
               <div className="bookshelf">
                 <h2 className="bookshelf-title">Currently Reading</h2>
                 <BookShelf
-                  books={books.filter((b) => b.shelf === "currentlyReading")} shelf={"currentlyReading"}
+                  books={books.filter((b) => b.shelf === "currentlyReading")}
+                  onUpdateShelf={updateBookShelf}
+                  shelf={"currentlyReading"}
                 />
               </div>
               <div className="bookshelf">
                 <h2 className="bookshelf-title">Want to read</h2>
                 <BookShelf
-                  books={books.filter((b) => b.shelf === "wantToRead")} shelf={"wantToRead"}
+                  books={books.filter((b) => b.shelf === "wantToRead")}
+                  onUpdateShelf={updateBookShelf}
+                  shelf={"wantToRead"}
                 />
               </div>
               <div className="bookshelf">
                 <h2 className="bookshelf-title">Read</h2>
                 <BookShelf
-                  books={books.filter((b) => b.shelf === "read")} shelf={"read"}
+                  books={books.filter((b) => b.shelf === "read")}
+                  onUpdateShelf={updateBookShelf}
+                  shelf={"read"}
                 />
               </div>
             </div>
