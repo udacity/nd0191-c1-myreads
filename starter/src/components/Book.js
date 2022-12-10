@@ -1,8 +1,8 @@
 import React from "react";
 import SelectShelf from "./SelectShelf";
 
-const Book = ({book, shelf, onUpdateShelf}) => {
-
+const Book = ({ book, list, shelf, onUpdateShelf }) => {
+  console.log(shelf)
   return (
     <div className="book">
       <div className="book-top">
@@ -15,7 +15,12 @@ const Book = ({book, shelf, onUpdateShelf}) => {
           }}
         ></div>
         <div className="book-shelf-changer">
-          <SelectShelf book={book} shelf={shelf} onUpdateShelf={onUpdateShelf}/>
+          <SelectShelf
+            list={list}
+            book={book}
+            shelf={shelf}
+            onUpdateShelf={onUpdateShelf}
+          />
         </div>
       </div>
       <div className="book-title">{book.title}</div>

@@ -1,16 +1,28 @@
 import React from "react";
 
-const SelectShelf = ({book, shelf,onUpdateShelf}) => {
+const SelectShelf = ({ book, shelf, onUpdateShelf, list }) => {
+  const options = list;
 
   return (
-    <select defaultValue={shelf} onChange={(e)=>onUpdateShelf(book,e.target.value)}>
-      <option value="none" disabled>
-        Move to...
-      </option>
-      <option value="currentlyReading">Currently Reading</option>
-      <option value="wantToRead">Want to Read</option>
-      <option value="read">Read</option>
-      <option value="none">None</option>
+    <select
+      value={shelf ? shelf : ""}
+      onChange={(e) => onUpdateShelf(book, e.target.value)}
+    >
+      {options.map((option, index) => {
+        if (index === 0) {
+          return (
+            <option key={index} value={option.value} disabled>
+              {option.label}
+            </option>
+          );
+        } else {
+          return (
+            <option key={index} value={option.value}>
+              {option.label}
+            </option>
+          );
+        }
+      })}
     </select>
   );
 };
