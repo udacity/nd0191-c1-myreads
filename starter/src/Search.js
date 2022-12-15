@@ -1,12 +1,13 @@
 import React from 'react'
+import PropTypes from "prop-types";
 
-function search(onshowSearchPage) {
+const Search = ({ChangeshowSearchPage}) =>{
   return (
     <div className="search-books">
     <div className="search-books-bar">
       <a
         className="close-search"
-        onClick={() => setShowSearchpage(!showSearchPage)}
+        onClick={() => ChangeshowSearchPage(false)}
       >
         Close
       </a>
@@ -24,4 +25,7 @@ function search(onshowSearchPage) {
   )
 }
 
-export default search
+Search.prototype ={
+  ChangeshowSearchPage: PropTypes.func.isRequired,
+}
+export default Search
