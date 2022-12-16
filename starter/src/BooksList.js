@@ -1,10 +1,9 @@
 import React from "react";
-import Currently from "./Currently";
-import Want from "./Want";
-import Read from "./Read";
+import ListContent from "./ListContent";
+
 import { Link } from "react-router-dom";
 
-const BooksList = () => {
+const BooksList = ({ BooksListState, UpdateBooksListState }) => {
   return (
     <div className="list-books">
       <div className="list-books-title">
@@ -12,9 +11,21 @@ const BooksList = () => {
       </div>
       <div className="list-books-content">
         <div>
-          <Currently />
-          <Want />
-          <Read />
+          <ListContent
+            BooksListContent={BooksListState.currentlyReading}
+            ListName="Currently Reading"
+            UpdateBooksListState={UpdateBooksListState}
+          />
+          <ListContent
+            BooksListContent={BooksListState.wantToRead}
+            ListName="Want to Read"
+            UpdateBooksListState={UpdateBooksListState}
+          />
+          <ListContent
+            BooksListContent={BooksListState.read}
+            ListName="Read"
+            UpdateBooksListState={UpdateBooksListState}
+          />
         </div>
       </div>
       <div className="open-search">

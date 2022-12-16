@@ -1,15 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import SearchInput from "./SearchInput";
 import SearchResults from "./SearchResults";
-const BooksSearch = () => {
+const BooksSearch = ({ UpdateBooksListState }) => {
   const [bookshelf, Setbookshelf] = useState([]);
   const SetList = (list) => {
     Setbookshelf(list);
   };
-  
+
   return (
     <div className="search-books">
       <div className="search-books-bar">
@@ -18,7 +17,10 @@ const BooksSearch = () => {
         </Link>
         <SearchInput SetList={SetList} />
       </div>
-      <SearchResults List={bookshelf} />
+      <SearchResults
+        List={bookshelf}
+        UpdateBooksListState={UpdateBooksListState}
+      />
     </div>
   );
 };

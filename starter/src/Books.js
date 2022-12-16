@@ -1,6 +1,6 @@
 import React from "react";
 import ShelfChanger from "./ShelfChanger";
-const Book = ({ book }) => {
+const Book = ({ book, UpdateBooksListState }) => {
   return (
     <li>
       <div className="book">
@@ -17,15 +17,16 @@ const Book = ({ book }) => {
               })`,
             }}
           />
-             <ShelfChanger />
+          <ShelfChanger
+            currentBook={book}
+            UpdateBooksListState={UpdateBooksListState}
+          />
         </div>
         <div className="book-title">{book.title}</div>
         <div className="book-authors">
           {book.authors ? book.authors.join(", ") : "Unknown Author"}
         </div>
-        
       </div>
-      
     </li>
   );
 };

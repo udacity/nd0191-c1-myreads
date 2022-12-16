@@ -1,31 +1,31 @@
-import React from 'react'
-import { search } from './BooksAPI'
-const SearchInput = ({SetList}) => {
-  const handleChange = event => {
-    // this.setState({ value: event.target.value });
+import React from "react";
+
+import * as BooksAPI from "./BooksAPI";
+const SearchInput = ({ SetList }) => {
+  const handleChange = (event) => {
     const val = event.target.value;
-   
-    if (val.length >0){
-      search(val,25).then((value) => {        
-        SetList(value)
-      }).catch((err)  => {
-        console.log(err)
-     })
-    }else{
-      SetList([])
+    if (val.length > 0) {
+      const getBooks = async () => {
+        const res = await BooksAPI.search(val, 25).catch((err) => {
+          console.log(err);
+        });
+        SetList(res);
+      };
+      getBooks();
+    } else {
+      SetList([]);
     }
   };
   return (
     <div className="search-books-input-wrapper">
-          <input
-          type="text"
-          placeholder="Search by title, author, or ISBN"
-          autoFocus
-          onChange={handleChange}
-        />
-        </div>
-   
-  )
-}
+      <input
+        type="text"
+        placeholder="Search by title, author, or ISBN"
+        autoFocus
+        onChange={handleChange}
+      />
+    </div>
+  );
+};
 
-export default SearchInput
+export default SearchInput;
