@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import BookShelf from "./BookShelf";
 import { getAll } from "./BooksAPI";
@@ -33,7 +34,7 @@ const BookShelves = ({ onNavigate }) => {
             </div>
         </div>
         <div className="open-search">
-            <a onClick={onNavigate}>Add a book</a>
+            <Link to="/search" />
         </div>
     </div>
     );

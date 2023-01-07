@@ -1,39 +1,23 @@
 import "./App.css";
-import React, { useState } from "react";
-
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import BookShelves from "./BookShelves";
-
-
-
+import SearchPage from "./SearchPage";
 
 function App() {
-  const [showSearchPage, setShowSearchpage] = useState(false);
-  return (
 
+  return (
+    //TODO see why adding routing slowed down the page load time so much
     <div className="app">
-      {showSearchPage ? (
-        <div className="search-books">
-          <div className="search-books-bar">
-            <a
-              className="close-search"
-              onClick={() => setShowSearchpage(!showSearchPage)}
-            >
-              Close
-            </a>
-            <div className="search-books-input-wrapper">
-              <input
-                type="text"
-                placeholder="Search by title, author, or ISBN"
-              />
-            </div>
-          </div>
-          <div className="search-books-results">
-            <ol className="books-grid"></ol>
-          </div>
-        </div>
-      ) : (
-        <BookShelves onNavigate={() => setShowSearchpage(!showSearchPage)} />
-      )}
+      <Routes>
+        <Route exact path="/" element={
+          <BookShelves />
+        } />
+        <Route path="/search" element={
+          <SearchPage />
+        } />
+      </Routes>
+
     </div>
   );
 }
