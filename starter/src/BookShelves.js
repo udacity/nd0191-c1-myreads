@@ -25,9 +25,11 @@ const BookShelves = ({ onNavigate }) => {
         </div>
         <div className="list-books-content">
             <div>
-                {
-                    shelves.map(shelf => (<BookShelf type={shelf} books={booksOnShelf.filter(book => book.shelf === shelf)} />))
-                }
+                <ol>
+                    {
+                        shelves.map(shelf => (<li key={shelf}><BookShelf type={shelf} books={booksOnShelf.filter(book => book.shelf === shelf)} /></li>))
+                    }
+                </ol>
             </div>
         </div>
         <div className="open-search">

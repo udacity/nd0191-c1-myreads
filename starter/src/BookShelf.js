@@ -12,7 +12,7 @@ const BookShelf = ({ type, books }) => {
                 <ol className="books-grid">
                     {books.map(
                         book => (
-                            <li>
+                            <li key={`${book.industryIdentifiers[0].type}=${book.industryIdentifiers[0].identifier}`}>
                                 <Book title={book.title} author={book.author} url={book.imageLinks.thumbnail} />
                             </li>
                         ))
