@@ -2,12 +2,33 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import BookShelf from "./BookShelf";
-import { getAll } from "./BooksAPI";
+import { getAll, update } from "./BooksAPI";
 
-const shelves = ["currentlyReading", "wantToRead", "read"];
-const BookShelves = ({ onNavigate }) => {
 
+//TODO handle errors in the asyn await below
+const BookShelves = () => {
+
+    const shelves = ["currentlyReading", "wantToRead", "read"];
     const [booksOnShelf, setBooksOnShelf] = useState([]);
+
+    const changeShelf = (book, newShelf) => {
+        const updateBooks = async () => {
+            const updatedShelf = await update(book, newShelf);
+            const books = await getAll();
+            setBooksOnShelf(books);
+        }
+        updateBooks();
+        /*update(book,  newShelf)
+            .then((updatedShelf) => {
+                let mounted = true;
+                getAll().then(
+                    books => {
+                        setBooksOnShelf(books);
+                        //console.log(books);
+                    });
+            });
+        */
+    };
 
     useEffect(() => {
         let mounted = true;
@@ -15,7 +36,7 @@ const BookShelves = ({ onNavigate }) => {
             books => {
                 mounted
                     && setBooksOnShelf(books);
-                console.log(books);
+                //console.log(books);
             });
         return () => { mounted = false };
     }, []);
@@ -28,7 +49,7 @@ const BookShelves = ({ onNavigate }) => {
             <div>
                 <ol>
                     {
-                        shelves.map(shelf => (<li key={shelf}><BookShelf type={shelf} books={booksOnShelf.filter(book => book.shelf === shelf)} /></li>))
+                        shelves.map(shelf => (<li key={shelf}><BookShelf type={shelf} books={booksOnShelf.filter(book => book.shelf === shelf)} onShelfChange={changeShelf} /></li>))
                     }
                 </ol>
             </div>

@@ -15,7 +15,6 @@ const BookShelfChanger = ({ shelf, onShelfChange }) => {
 
         </div>
 
-
     );
 }
 export default BookShelfChanger;

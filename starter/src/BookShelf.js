@@ -1,10 +1,11 @@
 
 import React from "react";
 import Book from "./Book";
-const BookShelf = ({ type, books }) => {
+const BookShelf = ({ type, books, onShelfChange }) => {
     const getTitle = () => type === 'currentlyReading' ? 'Currently Reading' :
         type === 'wantToRead' ? 'Want To Read' :
             type === 'read' ? 'Read' : 'Unknown shelf type';
+
     return (
         <div className="bookshelf">
             <h2 className="bookshelf-title">{getTitle()}</h2>
@@ -12,8 +13,8 @@ const BookShelf = ({ type, books }) => {
                 <ol className="books-grid">
                     {books.map(
                         book => (
-                            <li key={`${book.industryIdentifiers[0].type}=${book.industryIdentifiers[0].identifier}`}>
-                                <Book title={book.title} author={book.author} url={book.imageLinks.thumbnail} />
+                            <li key={book.id}>
+                                <Book book={book} shelf={type} onShelfChange={onShelfChange} />
                             </li>
                         ))
                     }
