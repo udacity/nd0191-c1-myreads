@@ -6,40 +6,25 @@ import { getAll, update } from "./BooksAPI";
 
 
 //TODO handle errors in the asyn await below
-const BookShelves = () => {
+const BookShelves = ({ booksOnShelf, booksById, bookToShelfMapper }) => {
 
     const shelves = ["currentlyReading", "wantToRead", "read"];
-    const [booksOnShelf, setBooksOnShelf] = useState([]);
 
     const changeShelf = (book, newShelf) => {
         const updateBooks = async () => {
             const updatedShelf = await update(book, newShelf);
             const books = await getAll();
-            setBooksOnShelf(books);
+            bookToShelfMapper(books);
         }
         updateBooks();
-        /*update(book,  newShelf)
-            .then((updatedShelf) => {
-                let mounted = true;
-                getAll().then(
-                    books => {
-                        setBooksOnShelf(books);
-                        //console.log(books);
-                    });
-            });
-        */
     };
 
-    useEffect(() => {
-        let mounted = true;
-        getAll().then(
-            books => {
-                mounted
-                    && setBooksOnShelf(books);
-                //console.log(books);
-            });
-        return () => { mounted = false };
-    }, []);
+    const getBooksOnShelf = (shelf) => {
+        let result = [];
+        if (booksOnShelf && booksById && booksOnShelf[shelf] && booksById[booksOnShelf[shelf][0]])
+            result = booksOnShelf[shelf].map(bookId => booksById[bookId]);
+        return result;
+    }
 
     return (<div className="list-books">
         <div className="list-books-title">
@@ -49,7 +34,7 @@ const BookShelves = () => {
             <div>
                 <ol>
                     {
-                        shelves.map(shelf => (<li key={shelf}><BookShelf type={shelf} books={booksOnShelf.filter(book => book.shelf === shelf)} onShelfChange={changeShelf} /></li>))
+                        shelves.map(shelf => (<li key={shelf}><BookShelf type={shelf} books={getBooksOnShelf(shelf)} onShelfChange={changeShelf} /></li>))
                     }
                 </ol>
             </div>
@@ -59,6 +44,8 @@ const BookShelves = () => {
         </div>
     </div>
     );
+
+
 };
 
 export default BookShelves;

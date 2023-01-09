@@ -8,6 +8,7 @@ const Book = ({ book, onShelfChange }) => {
 
     const changeShelf = e => onShelfChange(book, e.target.value);
 
+    //TODO book shelf is not present for the books in the search page, so you'll have to find a way to set the value manually for each book in the search results.
     return (
         <div className="book">
             <div className="book-top">
@@ -19,6 +20,7 @@ const Book = ({ book, onShelfChange }) => {
                         backgroundImage: url !== "" ? `url(${url})` : "",
                     }}
                 ></div>
+
                 <BookShelfChanger shelf={book.shelf} onShelfChange={changeShelf} />
             </div>
             <div className="book-title">{title}</div>
