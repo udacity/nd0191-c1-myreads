@@ -1,10 +1,10 @@
 import React from "react";
 import BookShelfChanger from "./BookShelfChanger";
 
-const Book = ({ book, shelf, onShelfChange }) => {
+const Book = ({ book, onShelfChange }) => {
     const title = book.title;
-    const author = book.author;
-    const url = book.imageLinks.thumbnail;
+    const author = book.authors && book.authors.join(', ') || "";
+    const url = book.imageLinks !== undefined && book.imageLinks.thumbnail !== undefined ? book.imageLinks.thumbnail : "";
 
     const changeShelf = e => onShelfChange(book, e.target.value);
 
@@ -16,11 +16,10 @@ const Book = ({ book, shelf, onShelfChange }) => {
                     style={{
                         width: 128,
                         height: 180,
-                        backgroundImage:
-                            `url(${url})`,
+                        backgroundImage: url !== "" ? `url(${url})` : "",
                     }}
                 ></div>
-                <BookShelfChanger shelf={shelf} onShelfChange={changeShelf} />
+                <BookShelfChanger shelf={book.shelf} onShelfChange={changeShelf} />
             </div>
             <div className="book-title">{title}</div>
             <div className="book-authors">{author}</div>

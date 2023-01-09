@@ -1,6 +1,7 @@
 
 import React from "react";
 import Book from "./Book";
+import BooksGrid from "./BooksGrid";
 const BookShelf = ({ type, books, onShelfChange }) => {
     const getTitle = () => type === 'currentlyReading' ? 'Currently Reading' :
         type === 'wantToRead' ? 'Want To Read' :
@@ -10,15 +11,7 @@ const BookShelf = ({ type, books, onShelfChange }) => {
         <div className="bookshelf">
             <h2 className="bookshelf-title">{getTitle()}</h2>
             <div className="bookshelf-books">
-                <ol className="books-grid">
-                    {books.map(
-                        book => (
-                            <li key={book.id}>
-                                <Book book={book} shelf={type} onShelfChange={onShelfChange} />
-                            </li>
-                        ))
-                    }
-                </ol>
+                <BooksGrid books={books} onShelfChange={onShelfChange} />
             </div>
         </div>);
 };
