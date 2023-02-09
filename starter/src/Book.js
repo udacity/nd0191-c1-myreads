@@ -1,23 +1,26 @@
 import BookShelfChanger from "./BookShelfChanger";
-import {useState, useEffect } from "react";
 import * as BooksAPI from "./BooksAPI.js";
 
-
-const Book = ({ bookObject }) => {
-
-  const [book, setBook] = useState(bookObject);
-
-  const updateBookShelfCallBack = (book) => {
-      console.log(book.shelf);
+const Book = ({ bookObject, onBookShelfChange }) => {
+  //update book callBack
+  const updateBookShelfCallBack = (updatedBook) => {
+    updateBookShelf(updatedBook, updatedBook.shelf);
   };
 
-  useEffect(() => {
-    const updateBookShelf = async (book, newShelf) => {
-      const res = await BooksAPI.update(book, newShelf);
-      setBook(res)
-    };
-    //  updateBookShelf(book, book.shelf);
-  }, [book]);
+  //reflect update to the Server
+  const updateBookShelf = async (book, newShelf) => {
+    const res = await BooksAPI.update(book, newShelf);
+    console.log(res);
+    onBookShelfChange(true);
+  };
+
+  let imagePath;
+
+  if(bookObject.imageLinks === undefined){
+    imagePath="";
+  }else{
+    imagePath = bookObject.imageLinks.smallThumbnail;
+  }
 
   return (
     <div className="book">
@@ -27,7 +30,7 @@ const Book = ({ bookObject }) => {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url("${bookObject.imageLinks.smallThumbnail}")`,
+            backgroundImage: `url("${imagePath}")`,
           }}
         ></div>
         <BookShelfChanger

@@ -11,9 +11,17 @@ const BookShelfChanger = ({ book, updateBookShelfCallBack }) => {
     updateBookShelfCallBack(updatedBook)
   };
 
+  let currentShelf;
+   if(book.shelf === undefined){
+    currentShelf= "none";
+  }else{
+    currentShelf=book.shelf;
+  }
+  console.log(currentShelf);
+
   return (
     <div className="book-shelf-changer">
-      <select value={book.shelf} onChange={onShelfChange}>
+      <select value={currentShelf} onChange={onShelfChange}>
         <option value="none" disabled>
           Move to...
         </option>

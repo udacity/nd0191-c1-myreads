@@ -1,10 +1,13 @@
 import Book from "./Book";
 
-const Shelf = ({ shelfObject, booksList }) => {
+const Shelf = ({ shelfObject, booksList, onShelfChanged }) => {
+  const shelfBooks = booksList.filter(
+    (book) => book.shelf === shelfObject.name
+  );
 
-  const shelfBooks = booksList.filter((book)=>(
-    book.shelf === shelfObject.name
-  ));
+  const onBookShelfChange = (shelfChanged) => {
+    onShelfChanged(shelfChanged);
+  };
 
   return (
     <div>
@@ -13,7 +16,11 @@ const Shelf = ({ shelfObject, booksList }) => {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {shelfBooks?.map((book) => (
-              <Book key = {book.id} bookObject={book} />
+              <Book
+                key={book.id}
+                bookObject={book}
+                onBookShelfChange={onBookShelfChange}
+              />
             ))}
           </ol>
         </div>
