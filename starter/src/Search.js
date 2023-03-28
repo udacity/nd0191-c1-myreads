@@ -25,6 +25,9 @@ const Search = ({ currentBooks, onBookChangeShelf }) => {
         return 'none';
     }
 
+    const getThumbnailUrl = (book) => {
+        return book.imageLinks?.thumbnail;
+    }
 
     return (
       <div className="search-books">
@@ -50,7 +53,7 @@ const Search = ({ currentBooks, onBookChangeShelf }) => {
                       id={book.id}
                       title={book.title}
                       authors={book.authors}
-                      thumbnailUrl={book.imageLinks.thumbnail}
+                      thumbnailUrl={getThumbnailUrl(book)}
                       shelf={getShelf(book, currentBooks)}
                       onBookChangeShelf={onBookChangeShelf}
                     />

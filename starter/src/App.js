@@ -23,8 +23,7 @@ function App() {
         getBooks();
     };
     update(id, shelf);
-};
-
+  };
 
   return (
     <div className="app">
