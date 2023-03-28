@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import ShelfSelector from "./ShelfSelector";
 
 const Book = ({ id, title, authors, thumbnailUrl, shelf, onBookChangeShelf }) => {
@@ -7,6 +8,10 @@ const Book = ({ id, title, authors, thumbnailUrl, shelf, onBookChangeShelf }) =>
       onBookChangeShelf(id, shelf);
     }
   }
+
+  const formatAuthors = (authors) => {
+    return (authors) ? authors.join(", ") : '';
+  };
 
   return (
       <div className="book">
@@ -22,9 +27,18 @@ const Book = ({ id, title, authors, thumbnailUrl, shelf, onBookChangeShelf }) =>
           <ShelfSelector shelf={shelf} onShelfChange={onShelfChange} />
       </div>
       <div className="book-title">{title}</div>
-      <div className="book-authors">{authors}</div>
+      <div className="book-authors">{formatAuthors(authors)}</div>
     </div>
   );
+};
+
+Book.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  authors: PropTypes.arrayOf(PropTypes.string),
+  thumbnailUrl: PropTypes.string,
+  shelf: PropTypes.string,
+  onBookChangeShelf: PropTypes.func
 };
 
 export default Book;

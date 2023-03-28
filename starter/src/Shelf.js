@@ -1,6 +1,9 @@
+import PropTypes from 'prop-types';
 import Book from './Book';
 
 const Shelf = ({ books, heading, shelf, onBookChangeShelf }) => {
+
+    //var res = books.fitler((book) => book.shelf === shelf);
 
     return (
         <div className="bookshelf">
@@ -29,6 +32,13 @@ const Shelf = ({ books, heading, shelf, onBookChangeShelf }) => {
       </div>
     );
 
+}
+
+Shelf.propTypes = {
+    books: PropTypes.arrayOf(Object).isRequired,
+    heading: PropTypes.string.isRequired,
+    shelf: PropTypes.string.isRequired,
+    onBookChangeShelf: PropTypes.func.isRequired
 }
 
 export default Shelf;

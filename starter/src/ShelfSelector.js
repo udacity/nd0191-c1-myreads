@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const ShelfSelector = ({ shelf, onShelfChange }) => {
     
     const selectedShelf = () => (shelf) ? shelf : 'none';
@@ -35,6 +37,11 @@ const ShelfSelector = ({ shelf, onShelfChange }) => {
             </select>
       </div>
     );
+}
+
+ShelfSelector.propTypes ={
+    shelf: PropTypes.string.isRequired,
+    onShelfChange: PropTypes.func.isRequired
 }
 
 export default ShelfSelector;

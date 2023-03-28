@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import Shelf from "./Shelf";
 
@@ -35,5 +36,10 @@ const BookList = ({ books, onBookChangeShelf }) => {
       </div>
     );
 };
+
+BookList.propTypes = {
+    books: PropTypes.arrayOf(Object).isRequired,
+    onBookChangeShelf: PropTypes.func.isRequired
+}
 
 export default BookList;
