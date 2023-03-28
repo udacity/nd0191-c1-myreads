@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import Book from "./Book";
 
-const BookList = ({ books }) => {
-
+const BookList = ({ books, onBookChange }) => {
     return (
         <div className="list-books">
         <div className="list-books-title">
@@ -18,7 +17,7 @@ const BookList = ({ books }) => {
                     {books.map((book) => {
                         if (book.shelf === "currentlyReading")
                             return (
-                                <li key={book.id}><Book book={book} /></li>
+                                <li key={book.id}><Book book={book} onBookChange={onBookChange} /></li>
                             );
                     })}
 
@@ -33,7 +32,7 @@ const BookList = ({ books }) => {
                 {books.map((book) => {
                         if (book.shelf === "wantToRead")
                             return (
-                                <li key={book.id}><Book book={book} /></li>
+                                <li key={book.id}><Book book={book} onBookChange={onBookChange} /></li>
                             );
                     })}
 
@@ -49,7 +48,7 @@ const BookList = ({ books }) => {
                 {books.map((book) => {
                         if (book.shelf === "read")
                             return (
-                                <li key={book.id}><Book book={book} /></li>
+                                <li key={book.id}><Book book={book} onBookChange={onBookChange} /></li>
                             );
                     })}
 

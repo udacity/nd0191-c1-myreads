@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Book from "./Book";
 import * as BooksAPI from "./BooksAPI";
 
-const Search = () => {
-    const [books, setBooks] = useState([]);
+const Search = ({ books }) => {
+    const [library, setLibrary] = useState([]);
 
     const searchBooks = (query) => {
         if (query === '') {
-            setBooks([]);
+            setLibrary([]);
             return [];
         }
 
         const search = async (query) => {
             const res = await BooksAPI.search(query);
             if (res.error) {
-                setBooks([]);
+                setLibrary([]);
             } else {
-                setBooks(res);
+                setLibrary(res);
             }
         }
         return search(query);
@@ -56,7 +56,7 @@ const Search = () => {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {books.map((book) => {
+            {library.map((book) => {
                 return (
                     <li key={book.id}>
                         <Book book={book} onBookChange={onBookChange} />
