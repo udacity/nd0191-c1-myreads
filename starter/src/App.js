@@ -8,17 +8,16 @@ import * as BooksAPI from "./BooksAPI";
 function App() {
   const [books, setBooks] = useState([]);
 
+  useEffect(() => {
+    getBooks();
+  }, []);
+
   const getBooks = async () => {
     const res = await BooksAPI.getAll();
     setBooks(res);
   };
 
-  useEffect(() => {
-
-    getBooks();
-  }, []);
-
-  const onBookChange = (id, shelf) => {
+  const onBookChangeShelf = (id, shelf) => {
     const update = async (id, shelf) => {
         await BooksAPI.update({ id: id }, shelf);
         getBooks();
@@ -30,8 +29,8 @@ function App() {
   return (
     <div className="app">
         <Routes>
-          <Route path="/search" element={ <Search books={books} onBookChange={onBookChange} /> } />
-          <Route exact path="/" element={ <BookList books={books} onBookChange={onBookChange} /> } />
+          <Route path="/search" element={ <Search currentBooks={books} onBookChangeShelf={onBookChangeShelf} /> } />
+          <Route exact path="/" element={ <BookList books={books} onBookChangeShelf={onBookChangeShelf} /> } />
         </Routes>
     </div>
   );

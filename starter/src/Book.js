@@ -1,10 +1,10 @@
-import BookShelfSelector from "./BookShelfSelector";
+import ShelfSelector from "./ShelfSelector";
 
-const Book = ({ book, onBookChange }) => {
+const Book = ({ id, title, authors, thumbnailUrl, shelf, onBookChangeShelf }) => {
   
   const onShelfChange = (shelf) => {
-    if (onBookChange){
-      onBookChange(book.id, shelf);
+    if (onBookChangeShelf){
+      onBookChangeShelf(id, shelf);
     }
   }
 
@@ -16,13 +16,13 @@ const Book = ({ book, onBookChange }) => {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${book.imageLinks.thumbnail})`
+            backgroundImage: `url(${thumbnailUrl})`
           }}
         ></div>
-          <BookShelfSelector shelf={book.shelf} onShelfChange={onShelfChange} />
+          <ShelfSelector shelf={shelf} onShelfChange={onShelfChange} />
       </div>
-      <div className="book-title">{book.title}</div>
-      <div className="book-authors">{book.authors}</div>
+      <div className="book-title">{title}</div>
+      <div className="book-authors">{authors}</div>
     </div>
   );
 };

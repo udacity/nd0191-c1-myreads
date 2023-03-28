@@ -3,40 +3,27 @@ import { Link } from "react-router-dom";
 import Book from "./Book";
 import * as BooksAPI from "./BooksAPI";
 
-const Search = ({ books }) => {
-    const [library, setLibrary] = useState([]);
+const Search = ({ currentBooks, onBookChangeShelf }) => {
+    const [catalog, setCatalog] = useState([]);
 
-    const searchBooks = (query) => {
-        if (query === '') {
-            setLibrary([]);
-            return [];
-        }
-
+    const searchCatalog = (query) => {
         const search = async (query) => {
-            const res = await BooksAPI.search(query);
-            if (res.error) {
-                setLibrary([]);
-            } else {
-                setLibrary(res);
-            }
+          const res = (query === "") ? [] : await BooksAPI.search(query);
+          setCatalog((Array.isArray(res) ? res : []))
         }
-        return search(query);
+        search(query);
       };
 
     const handleQueryChange = (event) => {
-        searchBooks(event.target.value);
+        searchCatalog(event.target.value);
     };
 
-    const onBookChange = (id, shelf) => {
-        console.log("BOOK CHANGE", id, shelf);
-
-        const update = async (id, shelf) => {
-            var res = await BooksAPI.update({ id: id }, shelf);
-            console.log("UPDATE", id, shelf, res);
-        };
-
-        update(id, shelf);
-    };
+    const getShelf = (book, currentBooks) => {
+        if (book.shelf) return book.shelf;
+        const res = currentBooks.find((b) => b.id === book.id);
+        if (res) return res.shelf;
+        return 'none';
+    }
 
 
     return (
@@ -56,11 +43,18 @@ const Search = ({ books }) => {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {library.map((book) => {
+            {catalog.map((book) => {
                 return (
-                    <li key={book.id}>
-                        <Book book={book} onBookChange={onBookChange} />
-                    </li>
+                  <li key={book.id}>
+                    <Book
+                      id={book.id}
+                      title={book.title}
+                      authors={book.authors}
+                      thumbnailUrl={book.imageLinks.thumbnail}
+                      shelf={getShelf(book, currentBooks)}
+                      onBookChangeShelf={onBookChangeShelf}
+                    />
+                  </li>
                 );
             })}
           </ol>

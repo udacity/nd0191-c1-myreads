@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Book from "./Book";
 
-const BookList = ({ books, onBookChange }) => {
+const BookList = ({ books, onBookChangeShelf }) => {
     return (
         <div className="list-books">
         <div className="list-books-title">
@@ -17,7 +17,16 @@ const BookList = ({ books, onBookChange }) => {
                     {books.map((book) => {
                         if (book.shelf === "currentlyReading")
                             return (
-                                <li key={book.id}><Book book={book} onBookChange={onBookChange} /></li>
+                                <li key={book.id}>
+                                <Book
+                                  id={book.id}
+                                  title={book.title}
+                                  authors={book.authors}
+                                  thumbnailUrl={book.imageLinks.thumbnail}
+                                  shelf={book.shelf}
+                                  onBookChangeShelf={onBookChangeShelf}
+                                />
+                              </li>
                             );
                     })}
 
@@ -32,7 +41,16 @@ const BookList = ({ books, onBookChange }) => {
                 {books.map((book) => {
                         if (book.shelf === "wantToRead")
                             return (
-                                <li key={book.id}><Book book={book} onBookChange={onBookChange} /></li>
+                                <li key={book.id}>
+                                <Book
+                                id={book.id}
+                                title={book.title}
+                                authors={book.authors}
+                                thumbnailUrl={book.imageLinks.thumbnail}
+                                shelf={book.shelf}
+                                onBookChangeShelf={onBookChangeShelf}
+                                />
+                            </li>
                             );
                     })}
 
@@ -44,13 +62,21 @@ const BookList = ({ books, onBookChange }) => {
               <div className="bookshelf-books">
                 <ol className="books-grid">
 
-
                 {books.map((book) => {
-                        if (book.shelf === "read")
-                            return (
-                                <li key={book.id}><Book book={book} onBookChange={onBookChange} /></li>
-                            );
-                    })}
+                    if (book.shelf === "read")
+                        return (
+                            <li key={book.id}>
+                            <Book
+                            id={book.id}
+                            title={book.title}
+                            authors={book.authors}
+                            thumbnailUrl={book.imageLinks.thumbnail}
+                            shelf={book.shelf}
+                            onBookChangeShelf={onBookChangeShelf}
+                            />
+                        </li>
+                        );
+                })}
 
                 </ol>
               </div>

@@ -1,4 +1,4 @@
-const BookShelfSelector = ({ shelf, onShelfChange }) => {
+const ShelfSelector = ({ shelf, onShelfChange }) => {
     
     const selectedShelf = () => (shelf) ? shelf : 'none';
 
@@ -37,4 +37,4 @@ const BookShelfSelector = ({ shelf, onShelfChange }) => {
     );
 }
 
-export default BookShelfSelector;
+export default ShelfSelector;
