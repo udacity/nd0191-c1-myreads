@@ -3,9 +3,9 @@ import Book from "./Book";
 const Bookshelf = ({books, category}) => {
 
     const isShelf = (book) => {
-        return book.shelf === 'currentlyReading' && category === 'Currently Reading'
-            || book.shelf === 'read' && category === 'Read'
-            || book.shelf == 'wantToRead' && category === 'Want to Read';
+        return (book.shelf === 'currentlyReading' && category === 'Currently Reading')
+            || (book.shelf === 'read' && category === 'Read')
+            || (book.shelf === 'wantToRead' && category === 'Want to Read');
     }
 
     return (
@@ -15,10 +15,10 @@ const Bookshelf = ({books, category}) => {
                 {books
                     .filter((book) => isShelf(book))
                     .map((book) =>
-                    <li key={book.id}>
-                        <Book book={book}/>
-                    </li>
-                )}
+                        <li key={book.id}>
+                            <Book book={book}/>
+                        </li>
+                    )}
             </ol>
         </div>
     )
