@@ -38,6 +38,8 @@ function App() {
         if (shelf === 'read') {
             setbooksRead([...booksRead, book]);
         }
+
+        addBookToShelf(book, shelf);
     }
 
     const addBookToShelf = (book, shelf) => {
