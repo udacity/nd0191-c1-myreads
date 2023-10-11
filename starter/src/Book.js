@@ -1,16 +1,21 @@
-const Book = ({book, onMoveBook}) => {
+const Book = ({book, onMoveBook, onAddBook}) => {
 
-    const moveBookToShelf = (event) => {
-        console.log(`Book: ` + book.title + ` is moved to ` + event.target.value);
-        onMoveBook(book, event.target.value);
+    const moveBookToCategory = (event) => {
+        if (onMoveBook) {
+            console.log(`Book: ` + book.title + ` is moved to ` + event.target.value);
+            onMoveBook(book, event.target.value);
+        } else {
+            console.log(`Book: ` + book.title + ` is added to ` + event.target.value);
+            onAddBook(book, event.target.value);
+        }
     }
 
     return (
         <div className="book">
             <form>
-                <img className="book-cover" alt="cover" src={book.imageLinks.thumbnail}/>
+                <img className="book-cover" alt="cover" src={book.imageLinks?.thumbnail}/>
                 <div className="book-shelf-changer">
-                    <select onChange={moveBookToShelf} name="shelf" id="shelf" value={book.shelf}>
+                    <select onChange={moveBookToCategory} name="shelf" id="shelf" value={book.shelf}>
                         <option value="select" disabled>Move to...</option>
                         <option value="currentlyReading">Currenty Reading</option>
                         <option value="wantToRead">Want to Read</option>
@@ -19,7 +24,7 @@ const Book = ({book, onMoveBook}) => {
                     </select>
                 </div>
                 <div className="book-title">{book.title}</div>
-                <div>{book.authors.map((author) => <div key={author} className="book-authors">{author}</div>)}</div>
+                <div>{book.authors?.map((author) => <div key={author} className="book-authors">{author}</div>)}</div>
             </form>
         </div>
     );

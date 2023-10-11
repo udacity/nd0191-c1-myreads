@@ -1,7 +1,9 @@
 import "./App.css";
 import * as BooksAPI from "./BooksAPI";
 import {useEffect, useState} from "react";
-import Bookshelf from "./Bookshelf";
+import {Route, Routes} from "react-router-dom";
+import Search from "./Search";
+import MyReads from "./MyReads";
 
 function App() {
 
@@ -38,15 +40,22 @@ function App() {
         }
     }
 
+    const addBookToShelf = (book, shelf) => {
+        console.log(`Book ${book.title} is added to ${shelf}`);
+        BooksAPI.update(book, shelf).then(
+            () => console.log(`The book is updated in BooksAPI`),
+            err => console.log(`The book was rejected. See ${err}`));
+    }
+
     return (
         <div className="app">
-            <div className="list-books-title">
-                <h1>MyReads</h1>
-            </div>
-            <Bookshelf books={booksCurrentlyReading} onMoveBook={moveBookToShelf}
-                       category="Currently Reading"></Bookshelf>
-            <Bookshelf books={booksWantToRead} onMoveBook={moveBookToShelf} category="Want to Read"></Bookshelf>
-            <Bookshelf books={booksRead} onMoveBook={moveBookToShelf} category="Read"></Bookshelf>
+            <Routes>
+                <Route path="/" element={<MyReads booksCurrentlyReading={booksCurrentlyReading}
+                                                  booksWantToRead={booksWantToRead} booksRead={booksRead}
+                                                  moveBookToShelf={moveBookToShelf}/>}/>
+                <Route path="/search" element={<Search onAddBook={addBookToShelf}/>}/>
+            </Routes>
+
         </div>
     );
 }
