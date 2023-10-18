@@ -1,13 +1,8 @@
-const Book = ({book, onMoveBook, onAddBook}) => {
+const Book = ({book, onMoveBook}) => {
 
     const moveBookToCategory = (event) => {
-        if (onMoveBook) {
-            console.log(`Book: ` + book.title + ` is moved to ` + event.target.value);
-            onMoveBook(book, event.target.value);
-        } else {
-            console.log(`Book: ` + book.title + ` is added to ` + event.target.value);
-            onAddBook(book, event.target.value);
-        }
+        console.log(`Book: ` + book.title + ` is moved to ` + event.target.value);
+        onMoveBook(book, event.target.value);
     }
 
     return (

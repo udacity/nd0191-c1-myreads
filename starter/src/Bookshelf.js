@@ -1,6 +1,6 @@
 import Book from "./Book";
 
-const Bookshelf = ({books, onMoveBook, onAddBook, category}) => {
+const Bookshelf = ({books, onMoveBook, category}) => {
 
     const shelf = () => {
         if (category === 'Want to Read') return 'wantToRead';
@@ -20,7 +20,7 @@ const Bookshelf = ({books, onMoveBook, onAddBook, category}) => {
             <ol className="books-grid">
                 {booksOnBookshelf.map((book) =>
                         <li key={book.id}>
-                            <Book book={book} onMoveBook={onMoveBook} onAddBook={onAddBook}/>
+                            <Book book={book} onMoveBook={onMoveBook}/>
                         </li>
                     )}
             </ol>

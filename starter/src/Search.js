@@ -2,7 +2,7 @@ import Bookshelf from "./Bookshelf";
 import {useState} from "react";
 import * as BooksAPI from "./BooksAPI";
 
-const Search = ({onAddBook}) => {
+const Search = ({onMoveBook}) => {
 
     const [books, setBooks] = useState([]);
 
@@ -36,7 +36,7 @@ const Search = ({onAddBook}) => {
                 <input type="text" placeholder="Search for a book title" onChange={searchBook}></input>
             </div>
             <div className="search-books-results">
-                <Bookshelf category="Found books" books={books} onAddBook={onAddBook}/>
+                <Bookshelf category="Found books" books={books} onMoveBook={onMoveBook}/>
             </div>
         </>
     )
