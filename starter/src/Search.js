@@ -1,8 +1,8 @@
-import Bookshelf from "./Bookshelf";
 import {useState} from "react";
 import * as BooksAPI from "./BooksAPI";
+import Book from "./Book";
 
-const Search = ({onMoveBook}) => {
+const Search = ({currentBooks, onMoveBook}) => {
 
     const [books, setBooks] = useState([]);
 
@@ -19,6 +19,12 @@ const Search = ({onMoveBook}) => {
                 if (resp?.error) {
                     setBooks([]);
                 } else {
+                    resp.forEach(boek => {
+                        let currentBook = currentBooks.find(book => book.id === boek.id);
+                        if (currentBook) {
+                            boek.shelf = currentBook.shelf;
+                        }
+                    });
                     setBooks(resp);
                 }
             }
@@ -36,7 +42,13 @@ const Search = ({onMoveBook}) => {
                 <input type="text" placeholder="Search for a book title" onChange={searchBook}></input>
             </div>
             <div className="search-books-results">
-                <Bookshelf category="Found books" books={books} onMoveBook={onMoveBook}/>
+                <ol className="books-grid">
+                    {books.map((book) =>
+                        <li key={book.id}>
+                            <Book book={book} onMoveBook={onMoveBook}/>
+                        </li>
+                    )}
+                </ol>
             </div>
         </>
     )

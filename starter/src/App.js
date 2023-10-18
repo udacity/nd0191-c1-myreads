@@ -37,7 +37,7 @@ function App() {
         <div className="app">
             <Routes>
                 <Route path="/" element={<MyReads books={books} moveBookToShelf={moveBookToShelf}/>}/>
-                <Route path="/search" element={<Search onMoveBook={storeBookOnShelf}/>}/>
+                <Route path="/search" element={<Search currentBooks={books} onMoveBook={storeBookOnShelf}/>}/>
             </Routes>
 
         </div>
@@ -45,8 +45,3 @@ function App() {
 }
 
 export default App;
-
-
-// TODO Search results on the search page allow the user to select “Currently Reading”, “Want to Read”, or “Read” to place the book in a certain shelf.
-// TODO If a book is assigned to a shelf on the main page and that book also appears on the search page, the correct shelf should be selected for that book on the search page.
-// TODO Books have the same state on both the search page and the main application page: If a book is on a bookshelf, that is reflected in both locations.
