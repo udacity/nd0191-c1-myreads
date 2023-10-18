@@ -7,42 +7,26 @@ import MyReads from "./MyReads";
 
 function App() {
 
-    const [booksCurrentlyReading, setBooksCurrentlyReading] = useState([]);
-    const [booksWantToRead, setbooksWantToRead] = useState([]);
-    const [booksRead, setbooksRead] = useState([]);
+    const [books, setBooks] = useState([]);
 
     useEffect(() => {
         const getBooks = async () => {
             const resp = await BooksAPI.getAll();
             console.log(resp);
-            setBooksCurrentlyReading(resp.filter(book => book.shelf === 'currentlyReading'));
-            setbooksWantToRead(resp.filter(book => book.shelf === 'wantToRead'));
-            setbooksRead(resp.filter(book => book.shelf === 'read'));
+            setBooks(resp);
         };
 
         getBooks();
     }, []);
 
     const moveBookToShelf = (book, shelf) => {
-        setBooksCurrentlyReading(booksCurrentlyReading.filter(b => b.id !== book.id));
-        setbooksWantToRead(booksWantToRead.filter(b => b.id !== book.id));
-        setbooksRead(booksRead.filter(b => b.id !== book.id));
-
         book.shelf = shelf;
-        if (shelf === 'currentlyReading') {
-            setBooksCurrentlyReading([...booksCurrentlyReading, book]);
-        }
-        if (shelf === 'wantToRead') {
-            setbooksWantToRead([...booksWantToRead, book]);
-        }
-        if (shelf === 'read') {
-            setbooksRead([...booksRead, book]);
-        }
+        setBooks([...books]);
 
-        addBookToShelf(book, shelf);
+        storeBookOnShelf(book, shelf);
     }
 
-    const addBookToShelf = (book, shelf) => {
+    const storeBookOnShelf = (book, shelf) => {
         console.log(`Book ${book.title} is added to ${shelf}`);
         BooksAPI.update(book, shelf).then(
             () => console.log(`The book is updated in BooksAPI`),
@@ -52,10 +36,8 @@ function App() {
     return (
         <div className="app">
             <Routes>
-                <Route path="/" element={<MyReads booksCurrentlyReading={booksCurrentlyReading}
-                                                  booksWantToRead={booksWantToRead} booksRead={booksRead}
-                                                  moveBookToShelf={moveBookToShelf}/>}/>
-                <Route path="/search" element={<Search onAddBook={addBookToShelf}/>}/>
+                <Route path="/" element={<MyReads books={books} moveBookToShelf={moveBookToShelf}/>}/>
+                <Route path="/search" element={<Search onAddBook={storeBookOnShelf}/>}/>
             </Routes>
 
         </div>
@@ -63,3 +45,8 @@ function App() {
 }
 
 export default App;
+
+
+// TODO Search results on the search page allow the user to select “Currently Reading”, “Want to Read”, or “Read” to place the book in a certain shelf.
+// TODO If a book is assigned to a shelf on the main page and that book also appears on the search page, the correct shelf should be selected for that book on the search page.
+// TODO Books have the same state on both the search page and the main application page: If a book is on a bookshelf, that is reflected in both locations.

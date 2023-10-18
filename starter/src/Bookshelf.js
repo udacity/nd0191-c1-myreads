@@ -2,15 +2,23 @@ import Book from "./Book";
 
 const Bookshelf = ({books, onMoveBook, onAddBook, category}) => {
 
+    const shelf = () => {
+        if (category === 'Want to Read') return 'wantToRead';
+        if (category === 'Currently Reading') return 'currentlyReading';
+        if (category === 'Read') return 'read';
+    }
+
+    const booksOnBookshelf = books.filter(book => book.shelf === shelf());
+
     return (
         <div className="bookshelf">
             <h1 className="bookshelf-title">{category}</h1>
             {
-                console.log(`Books size: ${books.length}`)
+                console.log(`Books size: ${booksOnBookshelf.length}`)
             }
-            <div hidden={books.length !== 0}>No books found</div>
+            <div hidden={booksOnBookshelf.length !== 0}>No books found</div>
             <ol className="books-grid">
-                {books.map((book) =>
+                {booksOnBookshelf.map((book) =>
                         <li key={book.id}>
                             <Book book={book} onMoveBook={onMoveBook} onAddBook={onAddBook}/>
                         </li>
