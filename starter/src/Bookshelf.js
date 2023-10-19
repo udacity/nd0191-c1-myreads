@@ -1,5 +1,6 @@
 import Book from './Book';
 import PropTypes from 'prop-types';
+import NoBooksFound from './NoBooksFound';
 
 const Bookshelf = ({books, onMoveBook, category}) => {
 
@@ -17,7 +18,7 @@ const Bookshelf = ({books, onMoveBook, category}) => {
             {
                 console.log(`Books size: ${booksOnBookshelf.length}`)
             }
-            <div hidden={booksOnBookshelf.length !== 0}>No books found</div>
+            <NoBooksFound books={booksOnBookshelf}/>
             <ol className="books-grid">
                 {booksOnBookshelf.map((book) =>
                         <li key={book.id}>

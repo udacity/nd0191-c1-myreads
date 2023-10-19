@@ -1,6 +1,7 @@
 import {useState} from "react";
 import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
+import NoBooksFound from './NoBooksFound';
 import PropTypes from 'prop-types';
 
 const Search = ({currentBooks, onMoveBook}) => {
@@ -46,6 +47,7 @@ const Search = ({currentBooks, onMoveBook}) => {
             </div>
             <div className="search-books-results">
                 <ol className="books-grid">
+                    <NoBooksFound books={books}/>
                     {books.map((book) =>
                         <li key={book.id}>
                             <Book book={book} onMoveBook={onMoveBook}/>
