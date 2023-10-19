@@ -23,6 +23,8 @@ const Search = ({currentBooks, onMoveBook}) => {
                         let currentBook = currentBooks.find(book => book.id === boek.id);
                         if (currentBook) {
                             boek.shelf = currentBook.shelf;
+                        } else {
+                            boek.shelf = 'none';
                         }
                     });
                     setBooks(resp);
