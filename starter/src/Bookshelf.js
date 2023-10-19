@@ -1,4 +1,5 @@
-import Book from "./Book";
+import Book from './Book';
+import PropTypes from 'prop-types';
 
 const Bookshelf = ({books, onMoveBook, category}) => {
 
@@ -26,6 +27,12 @@ const Bookshelf = ({books, onMoveBook, category}) => {
             </ol>
         </div>
     )
+}
+
+Bookshelf.propTypes = {
+    books: PropTypes.array.isRequired,
+    onMoveBook: PropTypes.func.isRequired,
+    category: PropTypes.string.isRequired
 }
 
 export default Bookshelf;

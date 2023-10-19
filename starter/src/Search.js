@@ -1,6 +1,7 @@
 import {useState} from "react";
 import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
+import PropTypes from 'prop-types';
 
 const Search = ({currentBooks, onMoveBook}) => {
 
@@ -54,6 +55,11 @@ const Search = ({currentBooks, onMoveBook}) => {
             </div>
         </>
     )
+}
+
+Search.propTypes = {
+    currentBooks: PropTypes.array.isRequired,
+    onMoveBook: PropTypes.func.isRequired,
 }
 
 export default Search;

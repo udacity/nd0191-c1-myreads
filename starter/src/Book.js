@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Book = ({book, onMoveBook}) => {
 
     const moveBookToCategory = (event) => {
@@ -23,6 +25,11 @@ const Book = ({book, onMoveBook}) => {
             </form>
         </div>
     );
+}
+
+Book.propTypes = {
+    book: PropTypes.object.isRequired,
+    onMoveBook: PropTypes.func.isRequired
 }
 
 export default Book;
