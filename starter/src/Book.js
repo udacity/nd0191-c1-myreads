@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
 
 const Book = ({book, onMoveBook}) => {
 
@@ -10,7 +11,9 @@ const Book = ({book, onMoveBook}) => {
     return (
         <div className="book">
             <form>
-                <img className="book-cover" alt="cover" src={book.imageLinks?.thumbnail}/>
+                <Link to={`/books/${book.id}`}>
+                    <img className="book-cover" alt="cover" src={book.imageLinks?.thumbnail}/>
+                </Link>
                 <div className="book-shelf-changer">
                     <select onChange={moveBookToCategory} name="shelf" id="shelf" value={book.shelf}>
                         <option value="select" disabled>Move to...</option>

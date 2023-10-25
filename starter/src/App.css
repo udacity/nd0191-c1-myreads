@@ -175,3 +175,28 @@ body,
   text-align: center;
   font-size: 0.8em;
 }
+
+.bookdetail {
+  padding: 0 10px 20px;
+}
+
+.bookdetail-title {
+  border-bottom: 1px solid #dedede;
+}
+
+.bookdetail-label {
+  font-style: italic;
+  margin-top: 5px;
+}
+
+.bookdetail-item {
+  margin-bottom: 5px;
+}
+
+.bookdetail .book-cover {
+  justify-content: center;
+}
+
+.bookdetail-backbutton {
+  margin-bottom: 10px;
+}

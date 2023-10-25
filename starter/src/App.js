@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {Route, Routes} from "react-router-dom";
 import Search from "./Search";
 import MyReads from "./MyReads";
+import BookDetail from "./BookDetail";
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<MyReads books={books} moveBookToShelf={moveBookToShelf}/>}/>
                 <Route path="/search" element={<Search currentBooks={books} onMoveBook={moveBookToShelf}/>}/>
+                <Route path="/books/:id" element={<BookDetail/>}/>
             </Routes>
 
         </div>

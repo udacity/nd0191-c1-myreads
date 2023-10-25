@@ -18,34 +18,30 @@ const Search = ({currentBooks, onMoveBook}) => {
         fetchBooks(searchValue, callback);
     }, 500);
 
-    const searchBook = (event) => {
-        console.log(`the search value is: ${event.target.value}`);
-
-        const getBooks = async () => {
-            let searchValue = event.target.value;
-            if (!searchValue || searchValue.trim() === '') {
-                debouncedFetchBooks.cancel(); // Cancel fetching books when there is no value entered anymore
-                setBooks([]);
-            } else {
-                debouncedFetchBooks(searchValue, resp => {
-                    if (resp?.error) {
-                        setBooks([]);
+    const getBooks = async (searchValue) => {
+        if (!searchValue || searchValue.trim() === '') {
+            debouncedFetchBooks.cancel(); // Cancel fetching books when there is no value entered anymore
+            setBooks([]);
+        } else {
+            debouncedFetchBooks(searchValue, resp => {
+                resp?.forEach(boek => {
+                    let currentBook = currentBooks.find(book => book.id === boek.id);
+                    if (currentBook) {
+                        boek.shelf = currentBook.shelf;
                     } else {
-                        resp?.forEach(boek => {
-                            let currentBook = currentBooks.find(book => book.id === boek.id);
-                            if (currentBook) {
-                                boek.shelf = currentBook.shelf;
-                            } else {
-                                boek.shelf = 'none';
-                            }
-                        });
-                        resp ? setBooks(resp) : setBooks([]);
+                        boek.shelf = 'none';
                     }
                 });
-            }
-        };
+                resp ? setBooks(resp) : setBooks([]);
+            });
+        }
+    };
 
-        getBooks();
+    const searchBook = (event) => {
+        let initialSearchValue = event.target.value;
+        console.log(`the search value is: ${initialSearchValue}`);
+
+        getBooks(initialSearchValue);
     };
 
     return (
