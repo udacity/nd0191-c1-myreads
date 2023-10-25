@@ -37,7 +37,7 @@ function App() {
         <div className="app">
             <Routes>
                 <Route path="/" element={<MyReads books={books} moveBookToShelf={moveBookToShelf}/>}/>
-                <Route path="/search" element={<Search currentBooks={books} onMoveBook={storeBookOnShelf}/>}/>
+                <Route path="/search" element={<Search currentBooks={books} onMoveBook={moveBookToShelf}/>}/>
             </Routes>
 
         </div>

@@ -3,34 +3,45 @@ import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
 import NoBooksFound from './NoBooksFound';
 import PropTypes from 'prop-types';
+import debounce from 'lodash.debounce';
 
 const Search = ({currentBooks, onMoveBook}) => {
 
     const [books, setBooks] = useState([]);
 
+    const fetchBooks = async (searchValue, callback) => {
+        const resp = await BooksAPI.search(searchValue, 100);
+        callback(resp);
+    }
+
+    const debouncedFetchBooks = debounce((searchValue, callback) => {
+        fetchBooks(searchValue, callback);
+    }, 500);
+
     const searchBook = (event) => {
-        console.log(`De waarde is: ${event.target.value}`);
+        console.log(`the search value is: ${event.target.value}`);
 
         const getBooks = async () => {
-            if (event.target.value === undefined || event.target.value.trim() === '') {
+            let searchValue = event.target.value;
+            if (!searchValue || searchValue.trim() === '') {
+                debouncedFetchBooks.cancel(); // Cancel fetching books when there is no value entered anymore
                 setBooks([]);
             } else {
-                const resp = await BooksAPI.search(event.target.value, 100);
-                console.log(resp);
-                console.log(resp?.error);
-                if (resp?.error) {
-                    setBooks([]);
-                } else {
-                    resp.forEach(boek => {
-                        let currentBook = currentBooks.find(book => book.id === boek.id);
-                        if (currentBook) {
-                            boek.shelf = currentBook.shelf;
-                        } else {
-                            boek.shelf = 'none';
-                        }
-                    });
-                    setBooks(resp);
-                }
+                debouncedFetchBooks(searchValue, resp => {
+                    if (resp?.error) {
+                        setBooks([]);
+                    } else {
+                        resp?.forEach(boek => {
+                            let currentBook = currentBooks.find(book => book.id === boek.id);
+                            if (currentBook) {
+                                boek.shelf = currentBook.shelf;
+                            } else {
+                                boek.shelf = 'none';
+                            }
+                        });
+                        resp ? setBooks(resp) : setBooks([]);
+                    }
+                });
             }
         };
 
