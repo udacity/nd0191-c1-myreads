@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
 import NoBooksFound from './NoBooksFound';
@@ -8,6 +8,16 @@ import debounce from 'lodash.debounce';
 const Search = ({currentBooks, onMoveBook}) => {
 
     const [books, setBooks] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+
+    useEffect(() => {
+        const searchValue = localStorage.getItem('searchValue');
+        if (searchValue) {
+            setSearchValue(searchValue);
+            console.log(`The stored searchValue is ${searchValue}`);
+            getBooks(searchValue);
+        }
+    }, []);
 
     const fetchBooks = async (searchValue, callback) => {
         const resp = await BooksAPI.search(searchValue, 100);
@@ -40,6 +50,8 @@ const Search = ({currentBooks, onMoveBook}) => {
     const searchBook = (event) => {
         let initialSearchValue = event.target.value;
         console.log(`the search value is: ${initialSearchValue}`);
+        setSearchValue(initialSearchValue);
+        localStorage.setItem('searchValue', initialSearchValue);
 
         getBooks(initialSearchValue);
     };
@@ -50,7 +62,8 @@ const Search = ({currentBooks, onMoveBook}) => {
                 <a href="/">
                     <div className="close-search"></div>
                 </a>
-                <input type="text" placeholder="Search for a book title" onChange={searchBook}></input>
+                <input type="text" placeholder="Search for a book title" onChange={searchBook}
+                       value={searchValue}></input>
             </div>
             <div className="search-books-results">
                 <ol className="books-grid">
