@@ -1,14 +1,32 @@
-import "./App.css";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import "./App.css";
 import MainPage from "./components/MainPage";
 import SearchPage from "./components/SearchPage";
+import { getAll } from "./BooksAPI";
 
 function App() {
+  const [books, setBooks] = useState([]);
+  useEffect(() => {
+    getBooks();
+  }, []);
+
+  const getBooks = async () => {
+    const booksFromServer = await getAll().then((data) => data);
+    setBooks(booksFromServer);
+  };
 
   return (
     <Routes>
-      <Route path="/" exact element={<MainPage />} />
-      <Route path="/search" element={<SearchPage />} />
+      <Route
+        path="/"
+        exact
+        element={<MainPage books={books} fetchBooks={getBooks} />}
+      />
+      <Route
+        path="/search"
+        element={<SearchPage books={books} fetchBooks={getBooks} />}
+      />
     </Routes>
   );
 }

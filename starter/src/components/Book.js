@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const Book = ({
-  book: { id, title, authors, imageLinks, shelf },
+  book: { id, title, authors, imageLinks, shelf = "none" },
   updateBook,
 }) => {
   const [loading, setLoading] = useState(false);
+  const isMounted = useRef(true);
+  useEffect(() => {
+    // clean up function
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
   const image = imageLinks
     ? imageLinks.smallThumbnail || imageLinks.thumbnail
     : "";
   const handleUpdate = async (e) => {
     setLoading(true);
     await updateBook({ id }, e.target.value);
-    setLoading(false);
+    if (isMounted.current) {
+      setLoading(false);
+    }
   };
 
   return (
@@ -31,7 +40,7 @@ const Book = ({
               <div className="spinner" />
             ) : (
               <select value={shelf} onChange={handleUpdate}>
-                <option value="none" disabled>
+                <option value="" disabled>
                   Move to...
                 </option>
                 <option value="currentlyReading">Currently Reading</option>
@@ -43,7 +52,7 @@ const Book = ({
           </div>
         </div>
         <div className="book-title">{title}</div>
-        <div className="book-authors">{[authors.join(", ")]}</div>
+        <div className="book-authors">{[authors?.join(", ")]}</div>
       </div>
     </li>
   );
