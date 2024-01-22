@@ -4,6 +4,7 @@ import "./App.css";
 import MainPage from "./components/MainPage";
 import SearchPage from "./components/SearchPage";
 import { getAll } from "./BooksAPI";
+import BookPage from "./components/BookPage";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -27,6 +28,7 @@ function App() {
         path="/search"
         element={<SearchPage books={books} fetchBooks={getBooks} />}
       />
+      <Route path="/book/:id" element={<BookPage />} />
     </Routes>
   );
 }

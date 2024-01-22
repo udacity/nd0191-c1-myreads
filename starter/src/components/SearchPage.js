@@ -49,7 +49,7 @@ function SearchPage({ books, fetchBooks }) {
     <div className="app">
       <div className="search-books">
         <div className="search-books-bar">
-          <Link to="/" className="close-search">
+          <Link to="/" className="back-button">
             Close
           </Link>
           <div className="search-books-input-wrapper">

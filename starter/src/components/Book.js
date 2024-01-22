@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 
 const Book = ({
   book: { id, title, authors, imageLinks, shelf = "none" },
@@ -6,15 +7,14 @@ const Book = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const isMounted = useRef(true);
+  const navigate = useNavigate()
   useEffect(() => {
     // clean up function
     return () => {
       isMounted.current = false;
     };
   }, []);
-  const image = imageLinks
-    ? imageLinks.smallThumbnail || imageLinks.thumbnail
-    : "";
+  const image = imageLinks ? imageLinks.smallThumbnail : "";
   const handleUpdate = async (e) => {
     setLoading(true);
     await updateBook({ id }, e.target.value);
@@ -29,6 +29,8 @@ const Book = ({
         <div className="book-top">
           <div
             className="book-cover"
+            onClick={()=> navigate(`/book/${id}`)}
+            role="button"
             style={{
               width: 128,
               height: 192,
