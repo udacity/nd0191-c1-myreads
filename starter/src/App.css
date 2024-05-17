@@ -69,7 +69,7 @@ body,
 
 .search-books-bar {
   position: fixed;
-  width: 100%;
+  width: 90%;
   top: 0;
   left: 0;
   z-index: 5;
@@ -112,8 +112,8 @@ body,
   list-style-type: none;
   padding: 0;
   margin: 0;
-
   display: flex;
+  gap: 70px; 
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -174,4 +174,155 @@ body,
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+/* book detail */
+.book-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.book-detail img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.book-detail h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.book-detail p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.book-detail button {
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  padding: 5px 10px;
+  margin: 25px;
+  background-color: #cfcfb2;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+
+/* Auth */
+.auth-container {
+  /* Add your styles here */
+  /* For example: */
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.auth-container h2 {
+  text-align: center;
+}
+
+.auth-container .error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-container form div {
+  margin-bottom: 10px;
+}
+
+.auth-container form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.auth-container form input {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.auth-container form button {
+  padding: 10px 20px;
+  background-color: #700b0b;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.auth-container a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-container a:hover {
+  background-color: #3e8e41;
+}
+
+/* header */
+.app-header {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding: 0.5rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info span {
+  margin-right: 1rem;
+}
+
+.user-info button {
+  padding: 10px 20px;
+  background-color: #700b0b;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.book-info {
+  position: absolute;
+  left: 0;
+  bottom: 160px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #2440bd;
+  background-image: url("./icons/information.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
 }
